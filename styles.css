@@ -194,6 +194,25 @@ body.loaded .header {
     }
 }
 
+.site-name {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: opacity 0.2s ease;
+}
+
+.site-name:hover {
+    opacity: 0.5;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
 .nav {
     display: flex;
     gap: 32px;
@@ -215,7 +234,8 @@ body.loaded .header {
 
 .social-nav {
     display: flex;
-    gap: 24px;
+    align-items: center;
+    gap: 20px;
 }
 
 .social-link {
@@ -230,6 +250,30 @@ body.loaded .header {
 
 .social-link:hover {
     opacity: 0.5;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+}
+
+.social-icon:hover {
+    opacity: 0.5;
+}
+
+.social-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.social-icon .icon-dark {
+    display: none;
+}
+
+.social-icon .icon-light {
+    display: block;
 }
 
 @media (max-width: 480px) {
@@ -513,9 +557,21 @@ body.dark-mode .header {
     background: rgba(0, 0, 0, 0.95);
 }
 
+body.dark-mode .site-name {
+    color: #fff;
+}
+
 body.dark-mode .nav-link,
 body.dark-mode .social-link {
     color: #fff;
+}
+
+body.dark-mode .social-icon .icon-light {
+    display: none;
+}
+
+body.dark-mode .social-icon .icon-dark {
+    display: block;
 }
 
 body.dark-mode .theme-toggle {
