@@ -1,3 +1,82 @@
+// Sound Effects System
+const SoundFX = {
+    enabled: true,
+    volume: 0.15,
+    sounds: {},
+
+    init() {
+        // Create subtle UI sounds using Web Audio API
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Load sound preference
+        const savedPref = localStorage.getItem('soundEnabled');
+        if (savedPref !== null) {
+            this.enabled = savedPref === 'true';
+        }
+        this.updateToggleButton();
+    },
+
+    // Generate a subtle tick sound
+    playTick(frequency = 800, duration = 0.03) {
+        if (!this.enabled || !this.audioContext) return;
+
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+
+        oscillator.frequency.value = frequency;
+        oscillator.type = 'sine';
+
+        gainNode.gain.setValueAtTime(this.volume, this.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + duration);
+
+        oscillator.start(this.audioContext.currentTime);
+        oscillator.stop(this.audioContext.currentTime + duration);
+    },
+
+    hover() {
+        this.playTick(600, 0.02);
+    },
+
+    click() {
+        this.playTick(800, 0.04);
+    },
+
+    navigate() {
+        this.playTick(500, 0.06);
+    },
+
+    toggle() {
+        this.enabled = !this.enabled;
+        localStorage.setItem('soundEnabled', this.enabled);
+        this.updateToggleButton();
+        if (this.enabled) this.click();
+    },
+
+    updateToggleButton() {
+        const btn = document.getElementById('soundToggle');
+        if (btn) {
+            const speakerOnSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+            const speakerOffSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
+            
+            btn.innerHTML = this.enabled 
+                ? speakerOnSVG + '<span style="vertical-align: middle;">On</span>'
+                : speakerOffSVG + '<span style="vertical-align: middle;">Off</span>';
+        }
+    }
+};
+
+// Initialize on first user interaction (required for Web Audio)
+let audioInitialized = false;
+document.addEventListener('click', () => {
+    if (!audioInitialized) {
+        SoundFX.init();
+        audioInitialized = true;
+    }
+}, { once: true });
+
 // Intro animation and transition
 document.addEventListener('DOMContentLoaded', () => {
     const intro = document.getElementById('intro');
@@ -8,45 +87,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const isInternalNavigation = document.referrer.includes(window.location.hostname);
 
     if (intro && (hasSeenIntro || isInternalNavigation)) {
-        // Skip intro animation
         intro.remove();
         body.classList.add('loaded');
+        addSoundEffects();
         return;
     }
 
     if (intro) {
-        // Mark that user has seen intro
         sessionStorage.setItem('hasSeenIntro', 'true');
 
-        // After intro animations complete, fade out overlay and reveal main content
         setTimeout(() => {
             intro.classList.add('hidden');
             body.classList.add('loaded');
         }, 2000);
 
-        // Remove intro from DOM after transition
         setTimeout(() => {
             intro.remove();
         }, 3000);
     } else {
-        // No intro element, just show content
         body.classList.add('loaded');
     }
+
+    addSoundEffects();
 });
 
-// Smooth scroll for navigation links
+function addSoundEffects() {
+    document.querySelectorAll('a, button, .project').forEach(el => {
+        el.addEventListener('mouseenter', () => SoundFX.hover());
+        el.addEventListener('click', () => SoundFX.click());
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(() => SoundFX.navigate(), 100);
+        });
+    });
+}
+
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
 
         if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
             window.scrollTo({
-                top: offsetPosition,
+                top: target.getBoundingClientRect().top + window.pageYOffset - 80,
                 behavior: 'smooth'
             });
         }
@@ -56,7 +142,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 
-// Clear any old theme preference and default to light
 localStorage.removeItem('theme');
 document.body.classList.remove('dark-mode');
 if (themeToggle) themeToggle.textContent = 'Dark';
@@ -70,64 +155,28 @@ if (themeToggle) {
     });
 }
 
-// Sound toggle with Material Design icons
+// Sound toggle
 const soundToggle = document.getElementById('soundToggle');
-
-// SVG icons with vertical alignment fix
-const speakerOnSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
-const speakerOffSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
-
-// Initialize sound state (default: on)
-let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
-
-function updateSoundButton() {
-    if (soundToggle) {
-        soundToggle.innerHTML = soundEnabled 
-            ? speakerOnSVG + '<span style="vertical-align: middle;">On</span>' 
-            : speakerOffSVG + '<span style="vertical-align: middle;">Off</span>';
-    }
-}
-
-function updateVideosMuted() {
-    const videos = document.querySelectorAll('video');
-    videos.forEach(video => {
-        video.muted = !soundEnabled;
-    });
-}
-
-// Set initial state
-updateSoundButton();
-updateVideosMuted();
-
-// Update videos when they load or play
-document.addEventListener('play', (e) => {
-    if (e.target.tagName === 'VIDEO') {
-        e.target.muted = !soundEnabled;
-    }
-}, true);
-
-document.addEventListener('loadeddata', (e) => {
-    if (e.target.tagName === 'VIDEO') {
-        e.target.muted = !soundEnabled;
-    }
-}, true);
-
 if (soundToggle) {
-    soundToggle.addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        localStorage.setItem('soundEnabled', soundEnabled);
-        updateSoundButton();
-        updateVideosMuted();
-    });
+    soundToggle.addEventListener('click', () => SoundFX.toggle());
 }
 
-// Hamburger menu toggle
+// Hamburger menu
 const hamburger = document.getElementById('hamburger');
 const nav = document.querySelector('.nav');
 
-if (hamburger && nav) {
+if (hamburger) {
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         nav.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
     });
 }
