@@ -129,3 +129,24 @@ const soundToggle = document.getElementById('soundToggle');
 if (soundToggle) {
         soundToggle.addEventListener('click', () => SoundFX.toggle());
 }
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const nav = document.querySelector('.nav');
+
+if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                            hamburger.classList.toggle('active');
+                            nav.classList.toggle('active');
+                            document.body.classList.toggle('menu-open');
+            });
+
+            // Close menu when clicking nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                            link.addEventListener('click', () => {
+                                                hamburger.classList.remove('active');
+                                                nav.classList.remove('active');
+                                                document.body.classList.remove('menu-open');
+                            });
+            });
+}
