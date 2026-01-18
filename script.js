@@ -69,3 +69,48 @@ if (themeToggle) {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 }
+
+// Sound toggle
+const soundToggle = document.getElementById('soundToggle');
+
+// Initialize sound state (default: on)
+let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+
+function updateSoundButton() {
+    if (soundToggle) {
+        soundToggle.innerHTML = soundEnabled 
+            ? '🔊 On' 
+            : '🔇 Off';
+    }
+}
+
+function updateVideosMuted() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+        video.muted = !soundEnabled;
+    });
+}
+
+// Set initial state
+updateSoundButton();
+updateVideosMuted();
+
+if (soundToggle) {
+    soundToggle.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        localStorage.setItem('soundEnabled', soundEnabled);
+        updateSoundButton();
+        updateVideosMuted();
+    });
+}
+
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const nav = document.querySelector('.nav');
+
+if (hamburger && nav) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        nav.classList.toggle('active');
+    });
+}
