@@ -235,7 +235,7 @@ body.loaded .header {
 .social-nav {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 24px;
 }
 
 .social-link {
@@ -545,14 +545,13 @@ video.project-image {
 
 .theme-toggle svg {
     display: block;
+    width: 18px;
+    height: 18px;
 }
 
-/* ==================== */
-/* Dark Mode */
-/* ==================== */
-body.dark-mode {
-    background-color: #000;
-    color: #fff;
+#themeToggle svg {
+    width: 16px;
+    height: 16px;
 }
 
 body.dark-mode .header {
