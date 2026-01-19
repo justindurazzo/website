@@ -60,17 +60,6 @@ if (themeToggle) {
         document.body.classList.toggle('dark-mode');
     });
 }
-        sessionStorage.setItem('hasSeenIntro', 'true');
-        setTimeout(() => {
-            intro.classList.add('hidden');
-            body.classList.add('loaded');
-        }, 2000);
-        setTimeout(() => {
-            intro.remove();
-        }, 3000);
-    } else {
-        body.classList.add('loaded');
-    }
 
     // Add sound effects to interactive elements
     document.querySelectorAll('a, button').forEach(el => {
