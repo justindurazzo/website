@@ -118,4 +118,16 @@ if (hamburger && navMenu) {
         navMenu.classList.toggle('active');
         SoundFX.click();
     });
+    // Back to top
+const backToTop = document.querySelector('.back-to-top');
+if (backToTop) {
+    backToTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        SoundFX.navigate();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
 }
