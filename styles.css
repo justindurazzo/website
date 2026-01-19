@@ -686,4 +686,7 @@ body.dark-mode .hamburger-line {
     .social-nav {
         gap: 16px;
     }
+       .header {
+        position: relative;
+    }
 }
