@@ -660,18 +660,35 @@ body.dark-mode .hamburger-line {
         display: flex;
     }
 
-    .nav {
+ .nav {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
+        bottom: 0;
         background: #fff;
         flex-direction: column;
-        padding: 20px 6vw;
-        gap: 16px;
-        border-bottom: 1px solid #e5e5e5;
-        z-index: 100;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        z-index: 1000;
+    }
+
+    body.dark-mode .nav {
+        background: #000;
+    }
+
+    .nav .nav-link {
+        color: #000;
+        font-size: 32px;
+        font-weight: 400;
+        text-transform: capitalize;
+        letter-spacing: -0.01em;
+    }
+
+    body.dark-mode .nav .nav-link {
+        color: #fff;
     }
 
     body.dark-mode .nav {
