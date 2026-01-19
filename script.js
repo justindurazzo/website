@@ -53,22 +53,13 @@ const moonSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
 
 function updateThemeIcon() {
     const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        const isDark = document.body.classList.contains('dark-mode');
-        themeToggle.innerHTML = isDark ? sunSVG : moonSVG;
-    }
+    // Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    });
 }
-
-// Intro animation and transition
-document.addEventListener('DOMContentLoaded', () => {
-    const intro = document.getElementById('intro');
-    const body = document.body;
-
-    // Initialize sound system
-    SoundFX.init();
-
-    // Initialize theme icon
-    updateThemeIcon();
 
     // Skip intro if already seen this session or coming from internal link
     const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
