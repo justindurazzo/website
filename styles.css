@@ -566,7 +566,9 @@ body.dark-mode .nav-link,
 body.dark-mode .social-link {
     color: #fff;
 }
-
+body.dark-mode .site-name {
+    color: #fff;
+}
 body.dark-mode .social-icon .icon-light {
     display: none;
 }
