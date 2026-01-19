@@ -110,3 +110,12 @@ const soundToggle = document.getElementById('soundToggle');
 if (soundToggle) {
     soundToggle.addEventListener('click', () => SoundFX.toggle());
 }
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav');
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        SoundFX.click();
+    });
+}
