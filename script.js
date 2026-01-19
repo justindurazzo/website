@@ -115,9 +115,7 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav');
 if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         SoundFX.click();
     });
-}
 }
