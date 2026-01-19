@@ -685,5 +685,26 @@ body.dark-mode .hamburger-line {
     .header {
         position: relative;
     }
+/* ==================== */
+/* Back to Top */
+/* ==================== */
+.back-to-top {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s ease;
+    margin-bottom: 24px;
+}
+
+.back-to-top:hover {
+    opacity: 0.5;
+}
+
+body.dark-mode .back-to-top {
+    color: #fff;
 }
 }
