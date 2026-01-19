@@ -557,9 +557,9 @@ video.project-image {
 body.dark-mode .header {
     background: rgba(0, 0, 0, 0.95);
 }
-
-body.dark-mode .site-name {
-    color: #fff;
+body.dark-mode {
+    background-color: #000 !important;
+    color: #fff !important;
 }
 
 body.dark-mode .nav-link,
