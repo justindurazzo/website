@@ -659,7 +659,6 @@ body.dark-mode .hamburger-line {
     .hamburger {
         display: flex;
     }
-
     .nav {
         display: none;
         position: absolute;
@@ -671,19 +670,20 @@ body.dark-mode .hamburger-line {
         padding: 20px 6vw;
         gap: 16px;
         border-bottom: 1px solid #e5e5e5;
-        z-index: 100;
+        z-index: 1000;
     }
-
     body.dark-mode .nav {
         background: #000;
         border-bottom-color: #333;
     }
-
     .nav.active {
         display: flex;
     }
-
     .social-nav {
-        gap: 16px;
+        display: none;
     }
+    .header {
+        position: relative;
+    }
+}
 }
