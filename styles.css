@@ -671,6 +671,7 @@ body.dark-mode .hamburger-line {
         padding: 20px 6vw;
         gap: 16px;
         border-bottom: 1px solid #e5e5e5;
+        z-index: 100;
     }
 
     body.dark-mode .nav {
