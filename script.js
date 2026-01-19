@@ -53,22 +53,13 @@ const moonSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
 
 function updateThemeIcon() {
     const themeToggle = document.getElementById('themeToggle');
-    // Theme toggle
+   // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
     });
 }
-
-    // Skip intro if already seen this session or coming from internal link
-    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
-    const isInternalNavigation = document.referrer.includes(window.location.hostname);
-
-    if (intro && (hasSeenIntro || isInternalNavigation)) {
-        intro.remove();
-        body.classList.add('loaded');
-    } else if (intro) {
         sessionStorage.setItem('hasSeenIntro', 'true');
         setTimeout(() => {
             intro.classList.add('hidden');
