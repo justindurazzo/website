@@ -713,6 +713,16 @@ body.dark-mode .hamburger-line {
     border-left: 1.5px solid #000;
     border-top: 1.5px solid #000;
     transform: rotate(45deg);
+    animation: bounceArrow 2s ease-in-out infinite;
+}
+
+@keyframes bounceArrow {
+    0%, 100% {
+        transform: rotate(45deg) translateY(0);
+    }
+    50% {
+        transform: rotate(45deg) translateY(-4px);
+    }
 }
 
 .back-to-top:hover {
