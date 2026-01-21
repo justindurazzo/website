@@ -61,6 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     SoundFX.init();
 
+        // Resume AudioContext on first user interaction (required by browser autoplay policy)
+        const resumeAudio = () => {
+                    if (SoundFX.audioContext && SoundFX.audioContext.state === 'suspended') {
+                                    SoundFX.audioContext.resume();
+                    }
+                    document.removeEventListener('click', resumeAudio);
+                    document.removeEventListener('touchstart', resumeAudio);
+                    document.removeEventListener('keydown', resumeAudio);
+        };
+        document.addEventListener('click', resumeAudio);
+        document.addEventListener('touchstart', resumeAudio);
+        document.addEventListener('keydown', resumeAudio);
+
     const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
     const isInternalNavigation = document.referrer.includes(window.location.hostname);
 
