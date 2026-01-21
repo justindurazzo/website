@@ -8,6 +8,9 @@ const SoundFX = {
         const savedPref = localStorage.getItem('soundEnabled');
         if (savedPref !== null) {
             this.enabled = savedPref === 'true';
+        } else {
+                        // First-time visitor: explicitly set sound to ON
+                        localStorage.setItem('soundEnabled', 'true');
         }
         this.updateToggleButton();
     },
