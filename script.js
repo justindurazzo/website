@@ -16,6 +16,10 @@ const SoundFX = {
     },
 
     playTick(frequency = 800, duration = 0.03) {
+                // Resume AudioContext if suspended (browser autoplay policy)
+                if (this.audioContext.state === 'suspended') {
+                                this.audioContext.resume();
+                }
         if (!this.enabled || !this.audioContext) return;
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
