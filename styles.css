@@ -736,3 +736,72 @@ body.dark-mode .back-to-top {
 body.dark-mode .back-to-top::before {
     border-color: #fff;
 }
+
+/* ==================== */
+/* Scroll Progress Indicator */
+/* ==================== */
+.scroll-indicator {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.scroll-indicator.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.scroll-indicator-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+.scroll-indicator-dot {
+    width: 3px;
+    height: 8px;
+    border-radius: 1.5px;
+    background: rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.scroll-indicator-dot:hover {
+    background: rgba(0, 0, 0, 0.4);
+    transform: scaleX(1.5);
+}
+
+.scroll-indicator-dot.active {
+    height: 16px;
+    background: #000;
+}
+
+body.dark-mode .scroll-indicator-dot {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .scroll-indicator-dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+body.dark-mode .scroll-indicator-dot.active {
+    background: #fff;
+}
+
+@media (max-width: 768px) {
+    .scroll-indicator {
+        display: none;
+    }
+}

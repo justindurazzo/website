@@ -125,6 +125,89 @@ if (themeToggle) {
     });
 }
 
+// Scroll Progress Indicator
+const scrollIndicator = document.getElementById('scrollIndicator');
+const scrollTrack = document.getElementById('scrollTrack');
+if (scrollIndicator && scrollTrack) {
+    const projects = document.querySelectorAll('.project');
+    projects.forEach((project, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('scroll-indicator-dot');
+        dot.addEventListener('click', () => {
+            SoundFX.navigate();
+            const headerOffset = 80;
+            const top = project.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+            window.scrollTo({ top, behavior: 'smooth' });
+        });
+        dot.addEventListener('mouseenter', () => SoundFX.hover());
+        scrollTrack.appendChild(dot);
+    });
+
+    scrollTrack.addEventListener('click', (e) => {
+        if (e.target.classList.contains('scroll-indicator-dot')) return;
+        const rect = scrollTrack.getBoundingClientRect();
+        const ratio = (e.clientY - rect.top) / rect.height;
+        const index = Math.min(Math.floor(ratio * projects.length), projects.length - 1);
+        SoundFX.navigate();
+        const headerOffset = 80;
+        const top = projects[index].getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top, behavior: 'smooth' });
+    });
+
+    const dots = scrollTrack.querySelectorAll('.scroll-indicator-dot');
+    let ticking = false;
+    let inWorkSection = false;
+    let mouseTimeout = null;
+
+    function showIndicator() {
+        if (inWorkSection) scrollIndicator.classList.add('visible');
+        clearTimeout(mouseTimeout);
+        mouseTimeout = setTimeout(() => {
+            scrollIndicator.classList.remove('visible');
+        }, 2000);
+    }
+
+    document.addEventListener('mousemove', showIndicator);
+
+    // Keep visible while hovering the indicator itself
+    scrollIndicator.addEventListener('mouseenter', () => {
+        clearTimeout(mouseTimeout);
+        if (inWorkSection) scrollIndicator.classList.add('visible');
+    });
+    scrollIndicator.addEventListener('mouseleave', () => {
+        mouseTimeout = setTimeout(() => {
+            scrollIndicator.classList.remove('visible');
+        }, 2000);
+    });
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
+                const workSection = document.getElementById('work');
+                if (workSection) {
+                    const workTop = workSection.offsetTop - 200;
+                    const workBottom = workSection.offsetTop + workSection.offsetHeight;
+                    inWorkSection = scrollY >= workTop && scrollY < workBottom;
+                }
+                if (inWorkSection) {
+                    showIndicator();
+                } else {
+                    scrollIndicator.classList.remove('visible');
+                }
+                dots.forEach((dot, i) => {
+                    const project = projects[i];
+                    const rect = project.getBoundingClientRect();
+                    const inView = rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.3;
+                    dot.classList.toggle('active', inView);
+                });
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+}
+
 // Sound toggle
 const soundToggle = document.getElementById('soundToggle');
 if (soundToggle) {
