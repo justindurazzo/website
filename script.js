@@ -208,6 +208,14 @@ if (scrollIndicator && scrollTrack) {
     });
 }
 
+// Project fade-in on scroll
+const projectObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.project').forEach(p => projectObserver.observe(p));
+
 // Sound toggle
 const soundToggle = document.getElementById('soundToggle');
 if (soundToggle) {
