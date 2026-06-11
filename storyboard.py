@@ -8,9 +8,9 @@ SHOTS = [
     ("f640f635-suarfotos439.jpeg",          1, "THE ROOM",        0.50, 0.15),  # crowd; keep balcony
     ("95048462-suarfotos526.jpeg",          2, "YOU (1) HERO",    0.50, 0.45),  # USER
     ("0bd1a363-suarfotos395.jpeg",          3, "THE DANCER",      0.50, 0.35),
-    ("3b2c58b3-suarfotos546_1.jpeg",        4, "DAVID (VOCALS)",  0.55, 0.45),
-    ("1e0af547-suarfotos605.jpeg",          5, "THE BLUR",        0.42, 0.45),  # abstract transition
-    ("73354ab7-suarfotos533.jpeg",          6, "YOU (2) CONFETTI",0.46, 0.45),  # USER
+    ("a4680f28-suarfotos525.jpeg",          4, "YOU (2) CROUCH",  0.48, 0.45),  # USER different type
+    ("3b2c58b3-suarfotos546_1.jpeg",        5, "DAVID (VOCALS)",  0.55, 0.45),
+    ("73354ab7-suarfotos533.jpeg",          6, "YOU (3) CONFETTI",0.46, 0.45),  # USER
     ("770b324a-suarfotos523.jpeg",          7, "STAGE EDGE",      0.55, 0.50),  # dancer on the lip
     ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 8, "CURTAIN / EXIT", 0.50, 0.45),
 ]
@@ -44,7 +44,7 @@ fbig  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
 fnum  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 flbl  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 19)
 
-d.text((PAD, 18), "IG STORY SET v4 — 8 slots, 9:16  (you in 2; ambient curtain close)",
+d.text((PAD, 18), "IG STORY SET v5 — 8 slots, 9:16  (you in 3: lean / crouch / confetti; blur dropped)",
        font=flbl, fill=(235,235,235))
 
 for i, (fn, num, lbl, hx, vy) in enumerate(SHOTS):
