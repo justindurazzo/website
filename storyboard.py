@@ -11,7 +11,7 @@ SHOTS = [
     ("95048462-suarfotos526.jpeg",          4, "YOU - HERO",      0.50, 0.45),
     ("3b2c58b3-suarfotos546_1.jpeg",        5, "DAVID (VOCALS)",  0.55, 0.45),
     ("a4680f28-suarfotos525.jpeg",          6, "YOU - CROUCH",    0.48, 0.45),
-    ("770b324a-suarfotos523.jpeg",          7, "STAGE EDGE",      0.55, 0.50),
+    ("f058fd3c-IMG_4384.jpeg",              7, "STAGE EDGE",      0.50, 0.50),  # USER's own crop of 523
     ("ac380085-suarfotos522.jpeg",          8, "BAND (DRINK)",    0.50, 0.45),
     ("84bc6df7-IMG_4387.png",               9, "YOU - CONFETTI",  0.50, 0.50),
     ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 10, "CURTAIN / EXIT", 0.50, 0.45),
@@ -46,7 +46,7 @@ fbig  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
 fnum  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 flbl  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 19)
 
-d.text((PAD, 18), "IG STORY SET v7 — 10 slots, 9:16  (added BAND WIDE #2 + BAND DRINK #8)",
+d.text((PAD, 18), "IG STORY SET v8 — 10 slots, 9:16  (#7 = your own stage-edge crop)",
        font=flbl, fill=(235,235,235))
 
 for i, (fn, num, lbl, hx, vy) in enumerate(SHOTS):
