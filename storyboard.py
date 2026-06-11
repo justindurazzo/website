@@ -10,7 +10,7 @@ SHOTS = [
     ("0bd1a363-suarfotos395.jpeg",          3, "THE DANCER",      0.50, 0.35),
     ("a4680f28-suarfotos525.jpeg",          4, "YOU (2) CROUCH",  0.48, 0.45),  # USER different type
     ("3b2c58b3-suarfotos546_1.jpeg",        5, "DAVID (VOCALS)",  0.55, 0.45),
-    ("73354ab7-suarfotos533.jpeg",          6, "YOU (3) CONFETTI",0.46, 0.45),  # USER
+    ("84bc6df7-IMG_4387.png",               6, "YOU (3) CONFETTI",0.50, 0.50),  # USER's own crop of 531
     ("770b324a-suarfotos523.jpeg",          7, "STAGE EDGE",      0.55, 0.50),  # dancer on the lip
     ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 8, "CURTAIN / EXIT", 0.50, 0.45),
 ]
@@ -44,7 +44,7 @@ fbig  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
 fnum  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 flbl  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 19)
 
-d.text((PAD, 18), "IG STORY SET v5 — 8 slots, 9:16  (you in 3: lean / crouch / confetti; blur dropped)",
+d.text((PAD, 18), "IG STORY SET v6 — 8 slots, 9:16  (#6 = your own confetti crop, normalized)",
        font=flbl, fill=(235,235,235))
 
 for i, (fn, num, lbl, hx, vy) in enumerate(SHOTS):

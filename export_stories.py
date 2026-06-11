@@ -12,7 +12,7 @@ SHOTS = [
     ("0bd1a363-suarfotos395.jpeg",          3, "the-dancer",      0.50, 0.35),
     ("a4680f28-suarfotos525.jpeg",          4, "you-crouch",      0.48, 0.45),
     ("3b2c58b3-suarfotos546_1.jpeg",        5, "david-vocals",    0.55, 0.45),
-    ("73354ab7-suarfotos533.jpeg",          6, "you-confetti",    0.46, 0.45),
+    ("84bc6df7-IMG_4387.png",               6, "you-confetti",    0.50, 0.50),
     ("770b324a-suarfotos523.jpeg",          7, "stage-edge",      0.55, 0.50),
     ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 8, "curtain-exit", 0.50, 0.45),
 ]
