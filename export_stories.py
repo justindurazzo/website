@@ -14,7 +14,8 @@ SHOTS = [
     ("f058fd3c-IMG_4384.jpeg",              5, "stage-edge",      0.50, 0.50),
     ("ac380085-suarfotos522.jpeg",          6, "band-drink",      0.50, 0.45),
     ("84bc6df7-IMG_4387.png",               7, "you-confetti",    0.50, 0.50),
-    ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 8, "curtain-exit", 0.50, 0.45),
+    ("b7e27895-IMG_4411.png",               8, "the-blur",        0.50, 0.45),
+    ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 9, "curtain-exit", 0.50, 0.45),
 ]
 
 OW, OH = 1080, 1920
