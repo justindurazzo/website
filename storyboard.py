@@ -5,20 +5,22 @@ BASE = "/root/.claude/uploads/f650b114-7abe-53e3-98ba-153e056e5d84/"
 # (file, slot#, label, h_anchor 0..1, v_anchor 0..1)
 # anchors: where the crop window is biased. 0.5 = center.
 SHOTS = [
-    ("f640f635-suarfotos439.jpeg",          1, "THE ROOM",        0.50, 0.15),  # crowd; keep balcony
-    ("95048462-suarfotos526.jpeg",          2, "YOU (1) HERO",    0.50, 0.45),  # USER
+    ("f640f635-suarfotos439.jpeg",          1, "THE ROOM",        0.50, 0.15),
+    ("b363ef58-suarfotos511.jpeg",          2, "BAND (WIDE)",     0.50, 0.45),
     ("0bd1a363-suarfotos395.jpeg",          3, "THE DANCER",      0.50, 0.35),
-    ("a4680f28-suarfotos525.jpeg",          4, "YOU (2) CROUCH",  0.48, 0.45),  # USER different type
+    ("95048462-suarfotos526.jpeg",          4, "YOU - HERO",      0.50, 0.45),
     ("3b2c58b3-suarfotos546_1.jpeg",        5, "DAVID (VOCALS)",  0.55, 0.45),
-    ("84bc6df7-IMG_4387.png",               6, "YOU (3) CONFETTI",0.50, 0.50),  # USER's own crop of 531
-    ("770b324a-suarfotos523.jpeg",          7, "STAGE EDGE",      0.55, 0.50),  # dancer on the lip
-    ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 8, "CURTAIN / EXIT", 0.50, 0.45),
+    ("a4680f28-suarfotos525.jpeg",          6, "YOU - CROUCH",    0.48, 0.45),
+    ("770b324a-suarfotos523.jpeg",          7, "STAGE EDGE",      0.55, 0.50),
+    ("ac380085-suarfotos522.jpeg",          8, "BAND (DRINK)",    0.50, 0.45),
+    ("84bc6df7-IMG_4387.png",               9, "YOU - CONFETTI",  0.50, 0.50),
+    ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 10, "CURTAIN / EXIT", 0.50, 0.45),
 ]
 
 TW, TH = 360, 640          # thumb 9:16
 HDR = 54                   # header strip per thumb
 PAD = 18
-COLS = 4
+COLS = 5
 ROWS = 2
 
 def crop_916(im, hx, vy):
@@ -44,7 +46,7 @@ fbig  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
 fnum  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 flbl  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 19)
 
-d.text((PAD, 18), "IG STORY SET v6 — 8 slots, 9:16  (#6 = your own confetti crop, normalized)",
+d.text((PAD, 18), "IG STORY SET v7 — 10 slots, 9:16  (added BAND WIDE #2 + BAND DRINK #8)",
        font=flbl, fill=(235,235,235))
 
 for i, (fn, num, lbl, hx, vy) in enumerate(SHOTS):

@@ -8,13 +8,15 @@ os.makedirs(OUT, exist_ok=True)
 # same crop anchors as the approved v2 storyboard
 SHOTS = [
     ("f640f635-suarfotos439.jpeg",          1, "the-room",        0.50, 0.15),
-    ("95048462-suarfotos526.jpeg",          2, "you-hero",        0.50, 0.45),
+    ("b363ef58-suarfotos511.jpeg",          2, "band-wide",       0.50, 0.45),
     ("0bd1a363-suarfotos395.jpeg",          3, "the-dancer",      0.50, 0.35),
-    ("a4680f28-suarfotos525.jpeg",          4, "you-crouch",      0.48, 0.45),
+    ("95048462-suarfotos526.jpeg",          4, "you-hero",        0.50, 0.45),
     ("3b2c58b3-suarfotos546_1.jpeg",        5, "david-vocals",    0.55, 0.45),
-    ("84bc6df7-IMG_4387.png",               6, "you-confetti",    0.50, 0.50),
+    ("a4680f28-suarfotos525.jpeg",          6, "you-crouch",      0.48, 0.45),
     ("770b324a-suarfotos523.jpeg",          7, "stage-edge",      0.55, 0.50),
-    ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 8, "curtain-exit", 0.50, 0.45),
+    ("ac380085-suarfotos522.jpeg",          8, "band-drink",      0.50, 0.45),
+    ("84bc6df7-IMG_4387.png",               9, "you-confetti",    0.50, 0.50),
+    ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 10, "curtain-exit", 0.50, 0.45),
 ]
 
 OW, OH = 1080, 1920
