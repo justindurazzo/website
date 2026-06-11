@@ -14,7 +14,7 @@ SHOTS = [
     ("770b324a-suarfotos523.jpeg",          5, "stage-edge",      0.55, 0.50),
     ("73354ab7-suarfotos533.jpeg",          6, "you-confetti",    0.46, 0.45),
     ("1e0af547-suarfotos605.jpeg",          7, "the-blur",        0.42, 0.45),
-    ("544b11d4-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton136.jpeg", 8, "you-offstage", 0.55, 0.40),
+    ("d66d8214-suarfotos544.jpeg",          8, "finale-hands-up", 0.50, 0.45),
 ]
 
 OW, OH = 1080, 1920

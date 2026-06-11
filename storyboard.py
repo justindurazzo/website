@@ -12,7 +12,7 @@ SHOTS = [
     ("770b324a-suarfotos523.jpeg",          5, "STAGE EDGE",      0.55, 0.50),  # dancer on the lip
     ("73354ab7-suarfotos533.jpeg",          6, "YOU (2) CONFETTI",0.46, 0.45),  # USER
     ("1e0af547-suarfotos605.jpeg",          7, "THE BLUR",        0.42, 0.45),  # abstract transition
-    ("544b11d4-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton136.jpeg", 8, "YOU (3) OFF-STAGE", 0.55, 0.40),  # USER
+    ("d66d8214-suarfotos544.jpeg",          8, "FINALE / HANDS UP", 0.50, 0.45),
 ]
 
 TW, TH = 360, 640          # thumb 9:16
@@ -44,7 +44,7 @@ fbig  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
 fnum  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 flbl  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 19)
 
-d.text((PAD, 18), "IG STORY SET v2 — 8 slots, 9:16  (you in 3; rest = crowd / dancers / guest)",
+d.text((PAD, 18), "IG STORY SET v3 — 8 slots, 9:16  (you in 2; close on guest finale)",
        font=flbl, fill=(235,235,235))
 
 for i, (fn, num, lbl, hx, vy) in enumerate(SHOTS):
