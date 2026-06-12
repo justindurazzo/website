@@ -8,9 +8,9 @@ os.makedirs(OUT, exist_ok=True)
 # same crop anchors as the approved v2 storyboard
 SHOTS = [
     ("f640f635-suarfotos439.jpeg",          1, "the-room",        0.50, 0.15),
-    ("0bd1a363-suarfotos395.jpeg",          2, "the-dancer",      0.50, 0.35),
-    ("3b2c58b3-suarfotos546_1.jpeg",        3, "david-vocals",    0.55, 0.45),
-    ("a4680f28-suarfotos525.jpeg",          4, "you-crouch",      0.48, 0.45),
+    ("a4680f28-suarfotos525.jpeg",          2, "you-crouch",      0.48, 0.45),
+    ("0bd1a363-suarfotos395.jpeg",          3, "the-dancer",      0.50, 0.35),
+    ("3b2c58b3-suarfotos546_1.jpeg",        4, "david-vocals",    0.55, 0.45),
     ("f058fd3c-IMG_4384.jpeg",              5, "stage-edge",      0.50, 0.50),
     ("84bc6df7-IMG_4387.png",               6, "you-confetti",    0.50, 0.50),
     ("b7e27895-IMG_4411.png",               7, "the-blur",        0.50, 0.45),

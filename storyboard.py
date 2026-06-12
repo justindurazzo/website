@@ -6,9 +6,9 @@ BASE = "/root/.claude/uploads/f650b114-7abe-53e3-98ba-153e056e5d84/"
 # anchors: where the crop window is biased. 0.5 = center.
 SHOTS = [
     ("f640f635-suarfotos439.jpeg",          1, "THE ROOM",        0.50, 0.15),
-    ("0bd1a363-suarfotos395.jpeg",          2, "THE DANCER",      0.50, 0.35),
-    ("3b2c58b3-suarfotos546_1.jpeg",        3, "DAVID (VOCALS)",  0.55, 0.45),
-    ("a4680f28-suarfotos525.jpeg",          4, "YOU - CROUCH",    0.48, 0.45),
+    ("a4680f28-suarfotos525.jpeg",          2, "YOU - CROUCH",    0.48, 0.45),
+    ("0bd1a363-suarfotos395.jpeg",          3, "THE DANCER",      0.50, 0.35),
+    ("3b2c58b3-suarfotos546_1.jpeg",        4, "DAVID (VOCALS)",  0.55, 0.45),
     ("f058fd3c-IMG_4384.jpeg",              5, "STAGE EDGE",      0.50, 0.50),  # USER's own crop of 523
     ("84bc6df7-IMG_4387.png",               6, "YOU - CONFETTI",  0.50, 0.50),  # USER's own crop of 531
     ("b7e27895-IMG_4411.png",               7, "THE BLUR",        0.50, 0.45),  # USER's own crop of 605
@@ -44,7 +44,7 @@ fbig  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
 fnum  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 flbl  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 19)
 
-d.text((PAD, 18), "IG STORY SET v11 — 8 slots, 9:16  (dropped band-drink)",
+d.text((PAD, 18), "IG STORY SET v12 — 8 slots, 9:16  (crouch moved to #2)",
        font=flbl, fill=(235,235,235))
 
 for i, (fn, num, lbl, hx, vy) in enumerate(SHOTS):
