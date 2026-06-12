@@ -10,17 +10,16 @@ SHOTS = [
     ("3b2c58b3-suarfotos546_1.jpeg",        3, "DAVID (VOCALS)",  0.55, 0.45),
     ("a4680f28-suarfotos525.jpeg",          4, "YOU - CROUCH",    0.48, 0.45),
     ("f058fd3c-IMG_4384.jpeg",              5, "STAGE EDGE",      0.50, 0.50),  # USER's own crop of 523
-    ("ac380085-suarfotos522.jpeg",          6, "BAND (DRINK)",    0.50, 0.45),
-    ("84bc6df7-IMG_4387.png",               7, "YOU - CONFETTI",  0.50, 0.50),  # USER's own crop of 531
-    ("b7e27895-IMG_4411.png",               8, "THE BLUR",        0.50, 0.45),  # USER's own crop of 605
-    ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 9, "CURTAIN / EXIT", 0.50, 0.45),
+    ("84bc6df7-IMG_4387.png",               6, "YOU - CONFETTI",  0.50, 0.50),  # USER's own crop of 531
+    ("b7e27895-IMG_4411.png",               7, "THE BLUR",        0.50, 0.45),  # USER's own crop of 605
+    ("fa970d0b-Droga5_Reunion_6.9.26_pictureplastic__Mark_Minton128.jpeg", 8, "CURTAIN / EXIT", 0.50, 0.45),
 ]
 
 TW, TH = 360, 640          # thumb 9:16
 HDR = 54                   # header strip per thumb
 PAD = 18
-COLS = 3
-ROWS = 3
+COLS = 4
+ROWS = 2
 
 def crop_916(im, hx, vy):
     w, h = im.size
@@ -45,7 +44,7 @@ fbig  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
 fnum  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 flbl  = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 19)
 
-d.text((PAD, 18), "IG STORY SET v10 — 9 slots, 9:16  (added THE BLUR #8, comedown before exit)",
+d.text((PAD, 18), "IG STORY SET v11 — 8 slots, 9:16  (dropped band-drink)",
        font=flbl, fill=(235,235,235))
 
 for i, (fn, num, lbl, hx, vy) in enumerate(SHOTS):
