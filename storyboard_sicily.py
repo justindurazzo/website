@@ -4,11 +4,11 @@ BASE = "/root/.claude/uploads/f650b114-7abe-53e3-98ba-153e056e5d84/"
 
 CHAPTERS = [
     ("CH.1  BUONGIORNO, PALERMO", [
-        ("10f28151-IMG_5788.jpeg", "1 landed",        0.50, 0.50),
-        ("61aa4aed-IMG_5899.jpeg", "2 you/street",    0.50, 0.45),
-        ("ba697cea-IMG_5836.jpeg", "3 tabacchi",      0.50, 0.50),
-        ("e56a5853-IMG_5813.jpeg", "4 balcony",       0.50, 0.50),
-        ("36b629d6-IMG_6065.jpeg", "5 horse",         0.50, 0.45),
+        ("61aa4aed-IMG_5899.jpeg", "1 you/street",    0.50, 0.45),
+        ("ba697cea-IMG_5836.jpeg", "2 tabacchi",      0.50, 0.50),
+        ("e56a5853-IMG_5813.jpeg", "3 balcony",       0.50, 0.50),
+        ("36b629d6-IMG_6065.jpeg", "4 horse",         0.50, 0.45),
+        ("f5ffbb44-IMG_5860.jpeg", "5 antiques",      0.50, 0.45),
     ]),
     ("CH.2  AL MERCATO", [
         ("4c780564-IMG_6026.jpeg", "6 seafood",       0.50, 0.50),
@@ -24,12 +24,12 @@ CHAPTERS = [
         ("48c8938b-IMG_5877.jpeg", "14 aperitivo",    0.50, 0.45),
         ("6fb5b683-IMG_5894.png",  "15 dog",          0.50, 0.55),
     ]),
-    ("CH.4  TRAMONTO", [
-        ("f5ffbb44-IMG_5860.jpeg", "16 antiques",     0.50, 0.45),
-        ("1b426ca1-IMG_6084.jpeg", "17 chandelier",   0.50, 0.50),
-        ("fc45aad8-IMG_5957.jpeg", "18 rooftop",      0.50, 0.45),
-        ("19811080-IMG_5953.jpeg", "19 beer/duomo",   0.50, 0.50),
-        ("692339f0-IMG_5960.jpeg", "20 sunset",       0.50, 0.50),
+    ("CH.4  TRAMONTO & ARRIVEDERCI", [
+        ("1b426ca1-IMG_6084.jpeg", "16 chandelier",   0.50, 0.50),
+        ("fc45aad8-IMG_5957.jpeg", "17 rooftop",      0.50, 0.45),
+        ("19811080-IMG_5953.jpeg", "18 beer/duomo",   0.50, 0.50),
+        ("692339f0-IMG_5960.jpeg", "19 sunset",       0.50, 0.50),
+        ("10f28151-IMG_5788.jpeg", "20 plane home",   0.50, 0.50),
     ]),
 ]
 
