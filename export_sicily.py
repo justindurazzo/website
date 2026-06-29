@@ -36,10 +36,21 @@ SHOTS = [
 OW, OH = 1080, 1920
 t = OW/OH
 
+# (zoom, hx, vy) overrides for shots needing a tighter/custom crop than full-frame 9:16
+ZOOM_OVERRIDE = {
+    "ba697cea-IMG_5836.jpeg": (1.18, 0.36, 0.42),  # tabacchi: bigger, pushed right-of-center
+}
+
 for fn, g, ch, slot, name, hx, vy in SHOTS:
     im = ImageOps.exif_transpose(Image.open(BASE+fn)).convert("RGB")
     w, h = im.size
-    if w/h > t:
+    if fn in ZOOM_OVERRIDE:
+        zoom, hx, vy = ZOOM_OVERRIDE[fn]
+        nw = int(w/zoom); nh = int(nw/t)
+        if nh > h:
+            nh = h; nw = int(nh*t)
+        x = int((w-nw)*hx); y = int((h-nh)*vy)
+    elif w/h > t:
         nw = int(h*t); nh = h; x = int((w-nw)*hx); y = 0
     else:
         nw = w; nh = int(w/t); x = 0; y = int((h-nh)*vy)

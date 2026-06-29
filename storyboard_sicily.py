@@ -40,11 +40,21 @@ LBL = 22                   # per-thumb label strip
 PAD = 12
 COLS = 6
 
-def crop916(im, hx, vy):
+ZOOM_OVERRIDE = {
+    "ba697cea-IMG_5836.jpeg": (1.18, 0.36, 0.42),  # tabacchi: bigger, pushed right-of-center
+}
+
+def crop916(im, hx, vy, fn=None):
     im = ImageOps.exif_transpose(im).convert("RGB")
     w, h = im.size
     t = 9/16
-    if w/h > t:
+    if fn in ZOOM_OVERRIDE:
+        zoom, hx, vy = ZOOM_OVERRIDE[fn]
+        nw = int(w/zoom); nh = int(nw/t)
+        if nh > h:
+            nh = h; nw = int(nh*t)
+        x = int((w-nw)*hx); y = int((h-nh)*vy)
+    elif w/h > t:
         nw = int(h*t); nh = h; x = int((w-nw)*hx); y = 0
     else:
         nw = w; nh = int(w/t); x = 0; y = int((h-nh)*vy)
@@ -71,7 +81,7 @@ for ci, (title, shots) in enumerate(CHAPTERS):
         ox = PAD + i*cell_w
         ty = oy + HDR
         d.text((ox+2, ty), lbl, font=fl, fill=(200,200,205))
-        canvas.paste(crop916(Image.open(BASE+fn), hx, vy), (ox, ty+LBL))
+        canvas.paste(crop916(Image.open(BASE+fn), hx, vy, fn), (ox, ty+LBL))
 
 OUT = "/home/user/website/sicily_chapters.jpg"
 canvas.save(OUT, quality=90)
