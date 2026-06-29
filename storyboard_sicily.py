@@ -4,32 +4,33 @@ BASE = "/root/.claude/uploads/f650b114-7abe-53e3-98ba-153e056e5d84/"
 
 CHAPTERS = [
     ("CH.1  BUONGIORNO, PALERMO", [
-        ("61aa4aed-IMG_5899.jpeg", "1 you/street",    0.50, 0.45),
-        ("ba697cea-IMG_5836.jpeg", "2 tabacchi",      0.50, 0.50),
-        ("e56a5853-IMG_5813.jpeg", "3 balcony",       0.50, 0.50),
-        ("36b629d6-IMG_6065.jpeg", "4 horse",         0.50, 0.45),
-        ("f5ffbb44-IMG_5860.jpeg", "5 antiques",      0.50, 0.45),
+        ("ba697cea-IMG_5836.jpeg", "1 tabacchi",      0.50, 0.50),
+        ("e0980238-IMG_6142.jpeg", "2 balcony/man",   0.50, 0.50),
+        ("36b629d6-IMG_6065.jpeg", "3 horse",         0.50, 0.45),
+        ("f5ffbb44-IMG_5860.jpeg", "4 antiques",      0.50, 0.45),
+        ("361ce422-IMG_6118.jpeg", "5 souvenirs",     0.50, 0.50),
     ]),
     ("CH.2  AL MERCATO", [
         ("4c780564-IMG_6026.jpeg", "6 seafood",       0.50, 0.50),
         ("f4a22a6d-IMG_6034.jpeg", "7 olives",        0.50, 0.45),
-        ("f07c6889-IMG_6090.jpeg", "8 madonna",       0.50, 0.50),
-        ("ca74efdf-IMG_6047.jpeg", "9 porchetta",     0.50, 0.45),
-        ("253e6871-IMG_5871.jpeg", "10 you/mirror",   0.50, 0.50),
+        ("d454f098-IMG_6121.jpeg", "8 lemon shirt",   0.50, 0.50),
+        ("f07c6889-IMG_6090.jpeg", "9 madonna",       0.50, 0.50),
+        ("ca74efdf-IMG_6047.jpeg", "10 porchetta",    0.50, 0.45),
+        ("253e6871-IMG_5871.jpeg", "11 you/mirror",   0.50, 0.50),
     ]),
     ("CH.3  MANGIA", [
-        ("8fffc94a-IMG_6070.jpeg", "11 panino",       0.50, 0.50),
-        ("41b2fa7a-IMG_5963.jpeg", "12 anelletti",    0.50, 0.50),
-        ("aff18a95-IMG_5815.jpeg", "13 pastries",     0.50, 0.50),
-        ("48c8938b-IMG_5877.jpeg", "14 aperitivo",    0.50, 0.45),
-        ("6fb5b683-IMG_5894.png",  "15 dog",          0.50, 0.55),
+        ("8fffc94a-IMG_6070.jpeg", "12 panino",       0.50, 0.50),
+        ("41b2fa7a-IMG_5963.jpeg", "13 anelletti",    0.50, 0.50),
+        ("aff18a95-IMG_5815.jpeg", "14 pastries",     0.50, 0.50),
+        ("48c8938b-IMG_5877.jpeg", "15 aperitivo",    0.50, 0.45),
+        ("6fb5b683-IMG_5894.png",  "16 dog",          0.50, 0.55),
     ]),
     ("CH.4  TRAMONTO & ARRIVEDERCI", [
-        ("1b426ca1-IMG_6084.jpeg", "16 chandelier",   0.50, 0.50),
-        ("fc45aad8-IMG_5957.jpeg", "17 rooftop",      0.50, 0.45),
-        ("19811080-IMG_5953.jpeg", "18 beer/duomo",   0.50, 0.50),
-        ("692339f0-IMG_5960.jpeg", "19 sunset",       0.50, 0.50),
-        ("10f28151-IMG_5788.jpeg", "20 plane home",   0.50, 0.50),
+        ("1b426ca1-IMG_6084.jpeg", "17 chandelier",   0.50, 0.50),
+        ("fc45aad8-IMG_5957.jpeg", "18 rooftop",      0.50, 0.45),
+        ("19811080-IMG_5953.jpeg", "19 beer/duomo",   0.50, 0.50),
+        ("692339f0-IMG_5960.jpeg", "20 sunset",       0.50, 0.50),
+        ("10f28151-IMG_5788.jpeg", "21 plane home",   0.50, 0.50),
     ]),
 ]
 
@@ -37,7 +38,7 @@ TW, TH = 248, 441          # thumb 9:16
 HDR = 34                   # chapter title bar
 LBL = 22                   # per-thumb label strip
 PAD = 12
-COLS = 5
+COLS = 6
 
 def crop916(im, hx, vy):
     im = ImageOps.exif_transpose(im).convert("RGB")
@@ -60,7 +61,7 @@ ft = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 
 fc = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 19)
 fl = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
 
-d.text((PAD, 14), "SICILY — 20 shots, 4 chapters of 5, 9:16  (post one chapter per drop)", font=ft, fill=(240,240,240))
+d.text((PAD, 14), "SICILY — 21 shots, 4 drops (5/6/5/5), 9:16  (street selfie + plain balcony cut; +balcony-man, souvenirs, lemon shirt)", font=ft, fill=(240,240,240))
 
 for ci, (title, shots) in enumerate(CHAPTERS):
     oy = 44 + PAD + ci*row_h
