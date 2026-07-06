@@ -944,6 +944,15 @@ body.dark-mode .project-media { background: #1a1a1a; }
     text-transform: uppercase;
     color: #000;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cursor-label svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-left: 2px; /* optical centering of the triangle */
 }
 /* hide the native cursor only over media, only while the bubble is live */
 body.has-media-cursor .project-media,

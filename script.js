@@ -194,6 +194,7 @@ function initMediaCursor() {
     const cursor = document.getElementById('cursor');
     if (!cursor) return;
     const label = cursor.querySelector('.cursor-label');
+    const PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
     document.body.classList.add('has-media-cursor');
 
     let targetX = 0, targetY = 0, curX = 0, curY = 0;
@@ -205,7 +206,8 @@ function initMediaCursor() {
             // snap to entry point so the bubble doesn't fly in from a stale spot
             targetX = curX = e.clientX;
             targetY = curY = e.clientY;
-            label.textContent = isVideo ? 'Play' : 'View';
+            if (isVideo) label.innerHTML = PLAY_ICON;
+            else label.textContent = 'View';
             cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
             cursor.classList.add('is-media');
             active = true;
