@@ -488,11 +488,11 @@ body.loaded [data-line] { transform: translateY(0); }
     width: 2px; height: 16px;
     padding: 0; border: none; border-radius: 1px;
     background: currentColor;
-    opacity: 0.22;
+    opacity: 0.5;
     cursor: pointer;
     transition: opacity 0.3s var(--ease), height 0.3s var(--ease);
 }
-.side-dot:hover { opacity: 0.55; }
+.side-dot:hover { opacity: 0.8; }
 .side-dot.active { opacity: 1; height: 26px; }
 @media (max-width: 900px), (hover: none) { .side-nav { display: none; } }
 
