@@ -1,4 +1,6 @@
+// ============================================================
 // Sound Effects System
+// ============================================================
 const SoundFX = {
     enabled: true,
     volume: 0.15,
@@ -9,17 +11,17 @@ const SoundFX = {
         if (savedPref !== null) {
             this.enabled = savedPref === 'true';
         } else {
-                        // First-time visitor: explicitly set sound to ON
-                        localStorage.setItem('soundEnabled', 'true');
+            // First-time visitor: explicitly set sound to ON
+            localStorage.setItem('soundEnabled', 'true');
         }
         this.updateToggleButton();
     },
 
     playTick(frequency = 800, duration = 0.03) {
-                // Resume AudioContext if suspended (browser autoplay policy)
-                if (this.audioContext.state === 'suspended') {
-                                this.audioContext.resume();
-                }
+        // Resume AudioContext if suspended (browser autoplay policy)
+        if (this.audioContext.state === 'suspended') {
+            this.audioContext.resume();
+        }
         if (!this.enabled || !this.audioContext) return;
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
@@ -54,78 +56,272 @@ const SoundFX = {
     }
 };
 
-// Intro animation and transition
+// ============================================================
+// Environment
+// ============================================================
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+// ============================================================
+// Lenis smooth scroll  (buttery momentum — the core "aaru feel")
+// ============================================================
+let lenis = null;
+function initLenis() {
+    if (prefersReducedMotion || typeof Lenis === 'undefined') return;
+    lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo-out
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.6,
+    });
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    window.lenis = lenis;
+}
+
+// Unified scroll helper — routes through Lenis when available
+function scrollToTarget(target, offset = -80) {
+    if (lenis) {
+        lenis.scrollTo(target, { offset, duration: 1.2 });
+    } else {
+        const el = typeof target === 'string' ? document.querySelector(target) : target;
+        const top = typeof target === 'number'
+            ? target
+            : el.getBoundingClientRect().top + window.pageYOffset + offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+    }
+}
+
+// ============================================================
+// Kinetic text reveals  (mask + rise + de-blur, staggered)
+// ============================================================
+function wrapWords(el) {
+    const text = el.textContent.trim();
+    const words = text.split(/\s+/);
+    el.textContent = '';
+    words.forEach((word, i) => {
+        const mask = document.createElement('span');
+        mask.className = 'line line--inline';
+        const inner = document.createElement('span');
+        inner.className = 'line-inner';
+        inner.style.setProperty('--i', i);
+        inner.textContent = word;
+        mask.appendChild(inner);
+        el.appendChild(mask);
+        // preserve the space between words (masks are inline-block)
+        if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+}
+
+function wrapLine(el) {
+    const text = el.textContent.trim();
+    const mask = document.createElement('span');
+    mask.className = 'line';
+    const inner = document.createElement('span');
+    inner.className = 'line-inner';
+    inner.textContent = text;
+    mask.appendChild(inner);
+    el.textContent = '';
+    el.appendChild(mask);
+    return mask;
+}
+
+function setupReveals() {
+    if (prefersReducedMotion) return;
+
+    // Intro paragraph — word-by-word
+    const introText = document.querySelector('.intro-text');
+    if (introText) wrapWords(introText);
+
+    // Project titles — single masked line
+    document.querySelectorAll('.project-title').forEach((title) => {
+        // skip if it wraps a link (keep the anchor intact)
+        if (title.querySelector('a')) return;
+        wrapLine(title);
+    });
+}
+
+// ============================================================
+// Project media — wrap for clip-reveal + enable hover-to-play
+// ============================================================
+function setupProjectMedia() {
+    document.querySelectorAll('.project').forEach((project) => {
+        const media = project.querySelector('.project-image');
+        if (!media || media.closest('.project-media')) return;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'project-media';
+        media.parentNode.insertBefore(wrapper, media);
+        wrapper.appendChild(media);
+
+        if (media.tagName === 'VIDEO') {
+            media.muted = true;
+            media.loop = true;
+            media.playsInline = true;
+            if (!isTouch) {
+                // hover-to-play
+                wrapper.addEventListener('mouseenter', () => {
+                    const p = media.play();
+                    if (p && p.catch) p.catch(() => {});
+                });
+                wrapper.addEventListener('mouseleave', () => {
+                    media.pause();
+                });
+            }
+            // tap / click toggles playback (native controls removed)
+            wrapper.addEventListener('click', () => {
+                if (media.paused) {
+                    const p = media.play();
+                    if (p && p.catch) p.catch(() => {});
+                } else {
+                    media.pause();
+                }
+            });
+        }
+    });
+}
+
+// ============================================================
+// Media cursor — a 'View / Play' bubble over project media only.
+// The native system cursor is used everywhere else.
+// ============================================================
+function initMediaCursor() {
+    if (isTouch || prefersReducedMotion) return;
+    const cursor = document.getElementById('cursor');
+    if (!cursor) return;
+    const label = cursor.querySelector('.cursor-label');
+    document.body.classList.add('has-media-cursor');
+
+    let targetX = 0, targetY = 0, curX = 0, curY = 0;
+    let active = false;
+
+    document.querySelectorAll('.project-media').forEach((media) => {
+        const isVideo = !!media.querySelector('video');
+        media.addEventListener('mouseenter', (e) => {
+            // snap to entry point so the bubble doesn't fly in from a stale spot
+            targetX = curX = e.clientX;
+            targetY = curY = e.clientY;
+            label.textContent = isVideo ? 'Play' : 'View';
+            cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
+            cursor.classList.add('is-media');
+            active = true;
+        });
+        media.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+        media.addEventListener('mouseleave', () => {
+            cursor.classList.remove('is-media');
+            active = false;
+        });
+    });
+
+    function render() {
+        if (active) {
+            curX += (targetX - curX) * 0.2;
+            curY += (targetY - curY) * 0.2;
+            cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
+        }
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+}
+
+// ============================================================
+// Boot
+// ============================================================
 document.addEventListener('DOMContentLoaded', () => {
     const intro = document.getElementById('intro');
     const body = document.body;
 
     SoundFX.init();
 
-        // Resume AudioContext on first user interaction (required by browser autoplay policy)
-        const resumeAudio = () => {
-                    if (SoundFX.audioContext && SoundFX.audioContext.state === 'suspended') {
-                                    SoundFX.audioContext.resume();
-                    }
+    // Resume AudioContext on first user interaction (browser autoplay policy)
+    const resumeAudio = () => {
+        if (SoundFX.audioContext && SoundFX.audioContext.state === 'suspended') {
+            SoundFX.audioContext.resume();
+        }
         document.removeEventListener('mousemove', resumeAudio);
-        };
-document.addEventListener('mousemove', resumeAudio);
-    
+    };
+    document.addEventListener('mousemove', resumeAudio);
+
+    // Prepare motion features
+    setupReveals();
+    setupProjectMedia();
+    initLenis();
+    initMediaCursor();
+
+    const revealIntro = () => {
+        const introText = document.querySelector('.intro-text');
+        if (introText) introText.classList.add('is-in');
+    };
+
     const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
     const isInternalNavigation = document.referrer.includes(window.location.hostname);
 
     if (intro && (hasSeenIntro || isInternalNavigation)) {
         intro.remove();
         body.classList.add('loaded');
+        revealIntro();
     } else if (intro) {
         sessionStorage.setItem('hasSeenIntro', 'true');
         setTimeout(() => {
             intro.classList.add('hidden');
             body.classList.add('loaded');
+            revealIntro();
         }, 2000);
         setTimeout(() => {
             intro.remove();
         }, 3000);
     } else {
         body.classList.add('loaded');
+        revealIntro();
     }
 
+    // hover / click sounds
     document.querySelectorAll('a, button').forEach(el => {
         el.addEventListener('mouseenter', () => SoundFX.hover());
         el.addEventListener('click', () => SoundFX.click());
     });
 });
 
-// Smooth scroll for navigation links
+// ============================================================
+// Anchor smooth scroll (routed through Lenis)
+// ============================================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return; // handled by back-to-top
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
             SoundFX.navigate();
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            scrollToTarget(target, -80);
         }
     });
 });
 
+// ============================================================
 // Theme toggle
+// ============================================================
 const themeToggle = document.getElementById('themeToggle');
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-                    const isDark = document.body.classList.contains('dark-mode');
-                    const sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-                    const moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2c-1.05 0-2.05.16-3 .46 4.06 1.27 7 5.06 7 9.54 0 4.48-2.94 8.27-7 9.54.95.3 1.95.46 3 .46 5.52 0 10-4.48 10-10S14.52 2 9 2z"/></svg>';
-                    themeToggle.innerHTML = isDark ? sunIcon : moonIcon;
+        const isDark = document.body.classList.contains('dark-mode');
+        const sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+        const moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2c-1.05 0-2.05.16-3 .46 4.06 1.27 7 5.06 7 9.54 0 4.48-2.94 8.27-7 9.54.95.3 1.95.46 3 .46 5.52 0 10-4.48 10-10S14.52 2 9 2z"/></svg>';
+        themeToggle.innerHTML = isDark ? sunIcon : moonIcon;
     });
 }
 
+// ============================================================
 // Scroll Progress Indicator
+// ============================================================
 const scrollIndicator = document.getElementById('scrollIndicator');
 const scrollTrack = document.getElementById('scrollTrack');
 if (scrollIndicator && scrollTrack) {
@@ -135,9 +331,7 @@ if (scrollIndicator && scrollTrack) {
         dot.classList.add('scroll-indicator-dot');
         dot.addEventListener('click', () => {
             SoundFX.navigate();
-            const headerOffset = 80;
-            const top = project.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-            window.scrollTo({ top, behavior: 'smooth' });
+            scrollToTarget(project, -80);
         });
         dot.addEventListener('mouseenter', () => SoundFX.hover());
         scrollTrack.appendChild(dot);
@@ -149,9 +343,7 @@ if (scrollIndicator && scrollTrack) {
         const ratio = (e.clientY - rect.top) / rect.height;
         const index = Math.min(Math.floor(ratio * projects.length), projects.length - 1);
         SoundFX.navigate();
-        const headerOffset = 80;
-        const top = projects[index].getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        window.scrollTo({ top, behavior: 'smooth' });
+        scrollToTarget(projects[index], -80);
     });
 
     const dots = scrollTrack.querySelectorAll('.scroll-indicator-dot');
@@ -169,7 +361,6 @@ if (scrollIndicator && scrollTrack) {
 
     document.addEventListener('mousemove', showIndicator);
 
-    // Keep visible while hovering the indicator itself
     scrollIndicator.addEventListener('mouseenter', () => {
         clearTimeout(mouseTimeout);
         if (inWorkSection) scrollIndicator.classList.add('visible');
@@ -180,7 +371,7 @@ if (scrollIndicator && scrollTrack) {
         }, 2000);
     });
 
-    window.addEventListener('scroll', () => {
+    const onScroll = () => {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const scrollY = window.scrollY;
@@ -205,23 +396,37 @@ if (scrollIndicator && scrollTrack) {
             });
             ticking = true;
         }
-    });
+    };
+    window.addEventListener('scroll', onScroll);
+    if (window.lenis) window.lenis.on('scroll', onScroll);
 }
 
-// Project fade-in on scroll
+// ============================================================
+// Project reveal on scroll (fade + clip + title mask)
+// ============================================================
 const projectObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            const titleLine = entry.target.querySelector('.project-title .line');
+            if (titleLine) titleLine.classList.add('is-in');
+            projectObserver.unobserve(entry.target);
+        }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 document.querySelectorAll('.project').forEach(p => projectObserver.observe(p));
 
+// ============================================================
 // Sound toggle
+// ============================================================
 const soundToggle = document.getElementById('soundToggle');
 if (soundToggle) {
     soundToggle.addEventListener('click', () => SoundFX.toggle());
 }
-// Hamburger menu toggle
+
+// ============================================================
+// Hamburger menu + Back to top
+// ============================================================
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav');
 if (hamburger && navMenu) {
@@ -229,16 +434,13 @@ if (hamburger && navMenu) {
         navMenu.classList.toggle('active');
         SoundFX.click();
     });
-    // Back to top
+}
+
 const backToTop = document.querySelector('.back-to-top');
 if (backToTop) {
     backToTop.addEventListener('click', (e) => {
         e.preventDefault();
         SoundFX.navigate();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        scrollToTarget(0, 0);
     });
-}
 }

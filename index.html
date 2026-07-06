@@ -50,6 +50,11 @@
     </script>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor" aria-hidden="true">
+        <span class="cursor-inner"><span class="cursor-label"></span></span>
+    </div>
+
     <!-- Grid Lines -->
     <div class="grid-lines" aria-hidden="true">
         <div class="grid-line"></div>
@@ -90,8 +95,6 @@
             </div>
         </div>
     </header>
-    </header>
-    </header>
 
     <main class="main">
         <section class="intro">
@@ -108,13 +111,13 @@
             <article class="project">
                 <h2 class="project-title">ACCENTURE - FIRST AI-ID KIT</h2>
                 <p class="project-desc">Responsible AI initiative combating deepfakes. Interactive platform featuring "Dial-A-Deepfake" and "Meet Your Digital Maker." Debuted at CES 2025 and SXSW.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/Accenture-First-AI-ID-KIT.mp4" poster="images/projects/Accenture_First_AI-ID-KIT.gif" controls playsinline class="project-image"></video>
+                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/Accenture-First-AI-ID-KIT.mp4" poster="images/projects/Accenture_First_AI-ID-KIT.gif" playsinline class="project-image"></video>
             </article>
 
             <article class="project">
                 <h2 class="project-title">DEFENDER - IMMERSIVE CONFIGURATION</h2>
                 <p class="project-desc">Next-gen content production & immersive product configuration for digital twin vehicle demos on Apple Vision Pro and Meta Quest. Partnered with NVIDIA, Unreal, Shutterstock.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/DEFENDER%20-%20IMMERSIVE%20CONFIGURATIONt.mp4" poster="images/projects/DEFENDER - IMMERSIVE CONFIGURATION.jpg" controls playsinline class="project-image"></video>
+                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/DEFENDER%20-%20IMMERSIVE%20CONFIGURATIONt.mp4" poster="images/projects/DEFENDER - IMMERSIVE CONFIGURATION.jpg" playsinline class="project-image"></video>
             </article>
 
             <article class="project">
@@ -126,19 +129,19 @@
             <article class="project">
                 <h2 class="project-title">PROLITERACY - THE IMPOSSIBLE BEDTIME STORY</h2>
                 <p class="project-desc">Machine learning voice cloning enabling parents to narrate stories regardless of literacy level.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/IMPOSSIBLE%20STORY%20H264%20230616%20(1).mp4" controls playsinline class="project-image"></video>
+                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/IMPOSSIBLE%20STORY%20H264%20230616%20(1).mp4" playsinline class="project-image"></video>
             </article>
 
             <article class="project">
                 <h2 class="project-title">NEW YORK TIMES - STORY PORTRAIT</h2>
                 <p class="project-desc">Interactive portrait creation based on subscriber reading habits. First interactive Droga5-NYT collaboration.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/NYT%20Story%20Portrait%20Case%20Study_Cannes.mp4" poster="images/projects/nyt-story-portrait-poster.jpg" controls playsinline class="project-image"></video>
+                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/NYT%20Story%20Portrait%20Case%20Study_Cannes.mp4" poster="images/projects/nyt-story-portrait-poster.jpg" playsinline class="project-image"></video>
             </article>
 
             <article class="project">
                 <h2 class="project-title">LPGA - IN HER HEAD VR</h2>
                 <p class="project-desc">Immersive installation exploring mental challenges of female professional golfers. Tribeca Film Festival 2023 selection.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/in-her-head.mp4" poster="images/projects/in-her-head.jpg" controls playsinline class="project-image"></video>
+                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/in-her-head.mp4" poster="images/projects/in-her-head.jpg" playsinline class="project-image"></video>
             </article>
 
             <article class="project">
@@ -150,7 +153,7 @@
             <article class="project">
                 <h2 class="project-title">FORAGER</h2>
                 <p class="project-desc">Multi-sensorial journey into the mycological universe with room-scale VR. SXSW 2023 premiere.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/forager.mp4" poster="images/projects/forager.jpg" controls playsinline class="project-image"></video>
+                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/forager.mp4" poster="images/projects/forager.jpg" playsinline class="project-image"></video>
             </article>
 
             <article class="project">
@@ -286,6 +289,7 @@
         <div class="scroll-indicator-track" id="scrollTrack"></div>
     </div>
 
+    <script src="lenis.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
