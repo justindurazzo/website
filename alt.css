@@ -422,14 +422,73 @@ body.loaded [data-line] { transform: translateY(0); }
 [data-reveal].in { opacity: 1; transform: none; }
 .statement-text[data-reveal] { transform: none; }  /* words handle their own */
 
-/* ---------- Footer ---------- */
+/* ---------- Footer + back to top ---------- */
 .foot {
-    display: flex; justify-content: space-between;
-    padding: 26px var(--pad);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 40px var(--pad);
     border-top: 1px solid var(--line);
+}
+.foot-meta {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
 }
-@media (max-width: 640px) { .foot { flex-direction: column; gap: 8px; } }
+.back-to-top {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 11px;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.3s ease;
+}
+.back-to-top:hover { color: var(--ink); }
+.back-to-top-arrow {
+    display: block;
+    width: 9px; height: 9px;
+    border-left: 1.5px solid currentColor;
+    border-top: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    animation: bounceUp 2s ease-in-out infinite;
+}
+@keyframes bounceUp {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); }
+    50%      { transform: rotate(45deg) translate(3px, -3px); }
+}
+@media (max-width: 640px) { .foot-meta { flex-direction: column; align-items: center; gap: 8px; text-align: center; } }
+
+/* ---------- Side scroll indicator (featured work) ---------- */
+.side-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    color: var(--ink);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s var(--ease);
+}
+.side-nav.visible { opacity: 1; pointer-events: auto; }
+.side-dot {
+    width: 2px; height: 16px;
+    padding: 0; border: none; border-radius: 1px;
+    background: currentColor;
+    opacity: 0.22;
+    cursor: pointer;
+    transition: opacity 0.3s var(--ease), height 0.3s var(--ease);
+}
+.side-dot:hover { opacity: 0.55; }
+.side-dot.active { opacity: 1; height: 26px; }
+@media (max-width: 900px), (hover: none) { .side-nav { display: none; } }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {

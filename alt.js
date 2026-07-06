@@ -79,8 +79,18 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('loaded');
         if (wipe) wipe.classList.add('lift');
     };
-    if (reduce || !wipe) { reveal(); if (wipe) wipe.remove(); }
-    else setTimeout(reveal, 1350);
+    // Skip the "Justin Durazzo" intro on internal navigation (e.g. clicking the
+    // logo / home) or once it's already been seen this session.
+    const host = window.location.hostname;
+    const internalNav = !!document.referrer && document.referrer.includes(host);
+    const seenIntro = sessionStorage.getItem('introSeen') === 'true';
+    if (reduce || !wipe || internalNav || seenIntro) {
+        reveal();
+        if (wipe) wipe.remove();
+    } else {
+        sessionStorage.setItem('introSeen', 'true');
+        setTimeout(reveal, 1350);
+    }
 
     // hero video: ensure it plays (autoplay can be blocked until interaction)
     const hero = document.getElementById('heroVideo');
@@ -135,11 +145,16 @@ document.querySelectorAll('[data-reveal], .card, .tile').forEach((el) => revealO
 
 // ---------- MLF-style autoplay previews (lazy + in-view) ----------
 const cardVideos = document.querySelectorAll('.card-media video[data-src]');
+const startOf = (v) => parseFloat(v.dataset.start) || 0;   // preview start seconds
+const seekStart = (v) => { try { v.currentTime = startOf(v); } catch (e) {} };
+
 const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         const v = entry.target;
         if (entry.isIntersecting) {
             if (!v.src) v.src = v.dataset.src;   // lazy-load on approach
+            const start = startOf(v);
+            if (start > 0 && v.readyState >= 1 && v.currentTime < start) seekStart(v);
             const p = v.play();
             if (p && p.catch) p.catch(() => {});
         } else {
@@ -147,7 +162,20 @@ const videoObserver = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.35 });
-cardVideos.forEach((v) => videoObserver.observe(v));
+
+cardVideos.forEach((v) => {
+    if (startOf(v) > 0) {
+        // manage the loop ourselves so it returns to the start timecode, not 0
+        v.loop = false;
+        v.addEventListener('loadedmetadata', () => seekStart(v));
+        v.addEventListener('ended', () => {
+            seekStart(v);
+            const p = v.play();
+            if (p && p.catch) p.catch(() => {});
+        });
+    }
+    videoObserver.observe(v);
+});
 
 // ---------- Project lightbox — click a card/tile to watch + read ----------
 const lightbox = document.getElementById('lightbox');
@@ -212,4 +240,52 @@ if (lightbox) {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && lightbox.classList.contains('open')) close();
     });
+}
+
+// ---------- Back to top ----------
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+    backToTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (lenis) lenis.scrollTo(0, { duration: 1.2 });
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ---------- Side scroll indicator (featured work) ----------
+const sideNav = document.getElementById('sideNav');
+const featured = document.querySelectorAll('.card');
+if (sideNav && featured.length) {
+    featured.forEach((card, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'side-dot';
+        dot.setAttribute('aria-label', 'Go to featured project ' + (i + 1));
+        dot.addEventListener('click', () => {
+            if (lenis) lenis.scrollTo(card, { offset: -80, duration: 1.2 });
+            else card.scrollIntoView({ behavior: 'smooth' });
+        });
+        sideNav.appendChild(dot);
+    });
+    const dots = sideNav.querySelectorAll('.side-dot');
+
+    // active dot = the card crossing the viewport's vertical center
+    const activeObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const idx = Array.prototype.indexOf.call(featured, entry.target);
+                dots.forEach((d, j) => d.classList.toggle('active', j === idx));
+            }
+        });
+    }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+    featured.forEach((c) => activeObs.observe(c));
+
+    // show the indicator only while the featured work section is on screen
+    const work = document.querySelector('.work');
+    if (work) {
+        const visObs = new IntersectionObserver((entries) => {
+            entries.forEach((e) => sideNav.classList.toggle('visible', e.isIntersecting));
+        }, { rootMargin: '-8% 0px -8% 0px' });
+        visObs.observe(work);
+    }
 }
