@@ -144,17 +144,22 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-reveal], .card, .tile').forEach((el) => revealObserver.observe(el));
 
 // ---------- MLF-style autoplay previews (lazy + in-view) ----------
+// data-start = first-play in-point; data-loop-start = in-point on every loop
+// after the first playthrough (falls back to data-start when omitted).
 const cardVideos = document.querySelectorAll('.card-media video[data-src]');
-const startOf = (v) => parseFloat(v.dataset.start) || 0;   // preview start seconds
-const seekStart = (v) => { try { v.currentTime = startOf(v); } catch (e) {} };
+const firstStartOf = (v) => parseFloat(v.dataset.start) || 0;
+const loopStartOf = (v) => (v.dataset.loopStart != null ? parseFloat(v.dataset.loopStart) : firstStartOf(v)) || 0;
+const managed = (v) => firstStartOf(v) > 0 || v.dataset.loopStart != null;
+const seekTo = (v, t) => { try { v.currentTime = t; } catch (e) {} };
 
 const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         const v = entry.target;
         if (entry.isIntersecting) {
             if (!v.src) v.src = v.dataset.src;   // lazy-load on approach
-            const start = startOf(v);
-            if (start > 0 && v.readyState >= 1 && v.currentTime < start) seekStart(v);
+            // before the first playthrough finishes, hold the first-play in-point
+            const start = firstStartOf(v);
+            if (start > 0 && v.readyState >= 1 && !v.dataset.looped && v.currentTime < start) seekTo(v, start);
             const p = v.play();
             if (p && p.catch) p.catch(() => {});
         } else {
@@ -164,12 +169,12 @@ const videoObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.35 });
 
 cardVideos.forEach((v) => {
-    if (startOf(v) > 0) {
-        // manage the loop ourselves so it returns to the start timecode, not 0
-        v.loop = false;
-        v.addEventListener('loadedmetadata', () => seekStart(v));
+    if (managed(v)) {
+        v.loop = false; // we manage the loop so it returns to the chosen in-point
+        v.addEventListener('loadedmetadata', () => seekTo(v, firstStartOf(v)));
         v.addEventListener('ended', () => {
-            seekStart(v);
+            v.dataset.looped = '1';           // subsequent loops use loopStart
+            seekTo(v, loopStartOf(v));
             const p = v.play();
             if (p && p.catch) p.catch(() => {});
         });
