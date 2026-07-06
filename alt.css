@@ -393,9 +393,9 @@ body.loaded [data-line] { transform: translateY(0); }
     display: inline-block;
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(30px, 6vw, 88px);
+    font-size: clamp(24px, 3.6vw, 50px);
     letter-spacing: -0.02em;
-    line-height: 1;
+    line-height: 1.05;
     position: relative;
 }
 .outro-mail::after {
