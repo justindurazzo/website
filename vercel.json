@@ -1,3 +1,7 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/alt", "destination": "/", "permanent": true },
+    { "source": "/about-alt", "destination": "/about", "permanent": true }
+  ]
 }

@@ -3,293 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Justin Durazzo | Global AI & Immersive Design</title>
-    <meta name="description" content="Portfolio of Justin Durazzo — Global AI & Immersive Design at Accenture Song. Interactive experiences, virtual reality, augmented reality, and AI projects for brands like Google, Under Armour, and the New York Times.">
-    <meta name="keywords" content="Justin Durazzo, AI design, immersive design, virtual reality, augmented reality, interactive experiences, Accenture Song">
+    <title>Justin Durazzo — AI & Immersive Design</title>
+    <meta name="description" content="Justin Durazzo — AI & Immersive Design at Accenture Song. Immersive experiences, VR, AR, and AI for Google, Under Armour, the New York Times, and more.">
     <link rel="canonical" href="https://justindurazzo.com/">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Justin Durazzo | Global AI & Immersive Design">
-    <meta property="og:description" content="Portfolio of Justin Durazzo — Global AI & Immersive Design at Accenture Song. Interactive experiences, VR, AR, and AI projects.">
+    <meta property="og:title" content="Justin Durazzo — AI & Immersive Design">
+    <meta property="og:description" content="Justin Durazzo — AI & Immersive Design at Accenture Song. Immersive experiences, VR, AR, and AI projects.">
     <meta property="og:url" content="https://justindurazzo.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Justin Durazzo">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Justin Durazzo | Global AI & Immersive Design">
-    <meta name="twitter:description" content="Portfolio of Justin Durazzo — Global AI & Immersive Design at Accenture Song. Interactive experiences, VR, AR, and AI projects.">
-
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="twitter:title" content="Justin Durazzo — AI & Immersive Design">
+    <meta name="twitter:description" content="Justin Durazzo — AI & Immersive Design at Accenture Song.">
 
     <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Justin Durazzo",
-        "url": "https://justindurazzo.com/"
-    }
-    </script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Justin Durazzo",
         "url": "https://justindurazzo.com/",
-        "jobTitle": "Global AI & Immersive Design",
-        "worksFor": {
-            "@type": "Organization",
-            "name": "Accenture Song"
-        }
+        "jobTitle": "AI & Immersive Design",
+        "worksFor": { "@type": "Organization", "name": "Accenture Song" }
     }
     </script>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="alt.css">
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor" id="cursor" aria-hidden="true">
-        <span class="cursor-inner"><span class="cursor-label"></span></span>
+    <!-- Page-load wipe (Barba-style) -->
+    <div class="wipe" id="wipe" aria-hidden="true">
+        <span class="wipe-name">JUSTIN DURAZZO</span>
     </div>
 
-    <!-- Grid Lines -->
-    <div class="grid-lines" aria-hidden="true">
-        <div class="grid-line"></div>
-        <div class="grid-line"></div>
-        <div class="grid-line"></div>
-        <div class="grid-line"></div>
-        <div class="grid-line"></div>
-    </div>
-
-    <!-- Intro Overlay -->
-    <div class="intro-overlay" id="intro">
-        <div class="intro-content">
-            <h1 class="intro-name">
-                <span class="intro-line">JUSTIN</span>
-                <span class="intro-line">DURAZZO</span>
-            </h1>
-            <p class="intro-tagline">Global AI & Immersive Design</p>
-        </div>
-    </div>
-
-    <header class="header">
-        <a href="index.html" class="site-name">JUSTIN DURAZZO</a>
+    <header class="nav" id="nav">
+        <a href="/" class="nav-logo">Justin Durazzo</a>
         <div class="nav-right">
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            <nav class="nav" id="nav">
-                <a href="about.html" class="nav-link">ABOUT</a>
-                <a href="#contact" class="nav-link">CONTACT</a>
+            <nav class="nav-links">
+                <a href="/about">About</a>
+                <a href="#contact">Contact</a>
             </nav>
-            <div class="social-nav">
-                <a href="http://instagram.com/justin.durazzo" target="_blank" rel="noopener" class="social-link">IG</a>
-                <a href="https://linkedin.com/in/justindurazzo" target="_blank" rel="noopener" class="social-link">IN</a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2c-1.05 0-2.05.16-3 .46 4.06 1.27 7 5.06 7 9.54 0 4.48-2.94 8.27-7 9.54.95.3 1.95.46 3 .46 5.52 0 10-4.48 10-10S14.52 2 9 2z"/></svg></button>
-                <button class="theme-toggle" id="soundToggle" aria-label="Toggle sound"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
+            <div class="nav-social">
+                <a href="http://instagram.com/justin.durazzo" target="_blank" rel="noopener">IG</a>
+                <a href="https://linkedin.com/in/justindurazzo" target="_blank" rel="noopener">IN</a>
+                <button class="nav-icon" id="themeToggle" aria-label="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+                <button class="nav-icon" id="soundToggle" aria-label="Toggle sound"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
             </div>
         </div>
     </header>
 
-    <main class="main">
-        <section class="intro">
-            <p class="intro-text">
-                Exploring art, design, tech and new media for opportunities in need of greater stories and more enriching human experience.
-            </p>
-            <p class="intro-role">
-                Global AI & Immersive Design at Accenture Song.<br>
-                Formerly Director of Innovation at Droga5, NY.
+    <!-- Full-bleed cinematic hero -->
+    <section class="hero" id="hero">
+        <div class="hero-media">
+            <video class="hero-video" id="heroVideo"
+                   src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/forager.mp4"
+                   poster="images/projects/forager.jpg"
+                   muted loop playsinline autoplay preload="metadata"></video>
+            <div class="hero-scrim"></div>
+        </div>
+        <div class="hero-content">
+            <p class="hero-eyebrow"><span data-line>AI &amp; Immersive Design</span></p>
+            <h1 class="hero-title">
+                <span class="hero-line"><span data-line>Technology in</span></span>
+                <span class="hero-line"><span data-line>service of more</span></span>
+                <span class="hero-line"><span data-line>human <em>stories</em>.</span></span>
+            </h1>
+        </div>
+        <div class="hero-foot">
+            <span class="hero-loc" data-line>Brooklyn, New York</span>
+            <a href="#work" class="hero-scroll" aria-label="Scroll to work">
+                <span>Selected Work</span>
+                <span class="hero-scroll-line"></span>
+            </a>
+            <span class="hero-role" data-line>Accenture Song · fmr. Droga5</span>
+        </div>
+    </section>
+
+    <main>
+        <!-- Intro statement -->
+        <section class="statement" id="about">
+            <p class="statement-text" data-reveal>
+                <span class="sw">Exploring</span> <span class="sw">art,</span> <span class="sw">design,</span> <span class="sw">technology</span> <span class="sw">and</span> <span class="sw">new</span> <span class="sw">media</span> <span class="sw">for</span> <span class="sw">opportunities</span> <span class="sw">in</span> <span class="sw">need</span> <span class="sw">of</span> <span class="sw">greater</span> <span class="sw">stories</span> <span class="sw">and</span> <span class="sw">more</span> <span class="sw">enriching</span> <span class="sw">human</span> <span class="sw">experience.</span>
             </p>
         </section>
 
+        <!-- Project index -->
         <section class="work" id="work">
-            <article class="project">
-                <h2 class="project-title">ACCENTURE - FIRST AI-ID KIT</h2>
-                <p class="project-desc">Responsible AI initiative combating deepfakes. Interactive platform featuring "Dial-A-Deepfake" and "Meet Your Digital Maker." Debuted at CES 2025 and SXSW.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/Accenture-First-AI-ID-KIT.mp4" poster="images/projects/Accenture_First_AI-ID-KIT.gif" playsinline class="project-image"></video>
-            </article>
+            <div class="work-head" data-reveal>
+                <span class="work-label">Selected Work</span>
+                <span class="work-count">2014 — 2025</span>
+            </div>
 
-            <article class="project">
-                <h2 class="project-title">DEFENDER - IMMERSIVE CONFIGURATION</h2>
-                <p class="project-desc">Next-gen content production & immersive product configuration for digital twin vehicle demos on Apple Vision Pro and Meta Quest. Partnered with NVIDIA, Unreal, Shutterstock.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/DEFENDER%20-%20IMMERSIVE%20CONFIGURATIONt.mp4" poster="images/projects/DEFENDER - IMMERSIVE CONFIGURATION.jpg" playsinline class="project-image"></video>
-            </article>
+            <div class="grid">
+                <article class="card card--wide" data-reveal>
+                    <a class="card-media" href="#">
+                        <video muted loop playsinline preload="none"
+                               poster="images/projects/Accenture_First_AI-ID-KIT.gif"
+                               data-src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/Accenture-First-AI-ID-KIT.mp4"></video>
+                    </a>
+                    <div class="card-meta">
+                        <span class="card-cat">Responsible AI · Interactive</span>
+                        <h2 class="card-title">Accenture — First AI-ID Kit</h2>
+                        <p class="card-desc">Responsible AI initiative combating deepfakes. Interactive platform featuring "Dial-A-Deepfake" and "Meet Your Digital Maker." Debuted at CES 2025 and SXSW.</p>
+                    </div>
+                </article>
 
-            <article class="project">
-                <h2 class="project-title">ACCENTURE SONG AI</h2>
-                <p class="project-desc">Multi-modal marketing workflow bridging research through optimization across projects.</p>
-                <img src="images/projects/song-ai.jpg" alt="Accenture Song AI" class="project-image">
-            </article>
+                <article class="card" data-reveal>
+                    <a class="card-media" href="#">
+                        <video muted loop playsinline preload="none"
+                               poster="images/projects/DEFENDER - IMMERSIVE CONFIGURATION.jpg"
+                               data-src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/DEFENDER%20-%20IMMERSIVE%20CONFIGURATIONt.mp4"></video>
+                    </a>
+                    <div class="card-meta">
+                        <span class="card-cat">Immersive Configuration · XR</span>
+                        <h2 class="card-title">Defender — Immersive Configuration</h2>
+                        <p class="card-desc">Next-gen content production &amp; immersive product configuration for digital twin vehicle demos on Apple Vision Pro and Meta Quest. Partnered with NVIDIA, Unreal, Shutterstock.</p>
+                    </div>
+                </article>
 
-            <article class="project">
-                <h2 class="project-title">PROLITERACY - THE IMPOSSIBLE BEDTIME STORY</h2>
-                <p class="project-desc">Machine learning voice cloning enabling parents to narrate stories regardless of literacy level.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/IMPOSSIBLE%20STORY%20H264%20230616%20(1).mp4" playsinline class="project-image"></video>
-            </article>
+                <article class="card" data-reveal>
+                    <a class="card-media" href="#">
+                        <video muted loop playsinline preload="none"
+                               poster="images/projects/in-her-head.jpg"
+                               data-src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/in-her-head.mp4"></video>
+                    </a>
+                    <div class="card-meta">
+                        <span class="card-cat">VR Installation</span>
+                        <h2 class="card-title">LPGA — In Her Head</h2>
+                        <p class="card-desc">Immersive installation exploring mental challenges of female professional golfers. Tribeca Film Festival 2023 selection.</p>
+                    </div>
+                </article>
 
-            <article class="project">
-                <h2 class="project-title">NEW YORK TIMES - STORY PORTRAIT</h2>
-                <p class="project-desc">Interactive portrait creation based on subscriber reading habits. First interactive Droga5-NYT collaboration.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/NYT%20Story%20Portrait%20Case%20Study_Cannes.mp4" poster="images/projects/nyt-story-portrait-poster.jpg" playsinline class="project-image"></video>
-            </article>
+                <article class="card card--wide" data-reveal>
+                    <a class="card-media" href="#">
+                        <video muted loop playsinline preload="none"
+                               poster="images/projects/nyt-story-portrait-poster.jpg"
+                               data-src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/NYT%20Story%20Portrait%20Case%20Study_Cannes.mp4"></video>
+                    </a>
+                    <div class="card-meta">
+                        <span class="card-cat">Interactive · Data Portrait</span>
+                        <h2 class="card-title">New York Times — Story Portrait</h2>
+                        <p class="card-desc">Interactive portrait creation based on subscriber reading habits. First interactive Droga5-NYT collaboration.</p>
+                    </div>
+                </article>
 
-            <article class="project">
-                <h2 class="project-title">LPGA - IN HER HEAD VR</h2>
-                <p class="project-desc">Immersive installation exploring mental challenges of female professional golfers. Tribeca Film Festival 2023 selection.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/in-her-head.mp4" poster="images/projects/in-her-head.jpg" playsinline class="project-image"></video>
-            </article>
+                <article class="card" data-reveal>
+                    <a class="card-media" href="#">
+                        <video muted loop playsinline preload="none"
+                               data-src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/IMPOSSIBLE%20STORY%20H264%20230616%20(1).mp4"></video>
+                    </a>
+                    <div class="card-meta">
+                        <span class="card-cat">Voice AI · Social Impact</span>
+                        <h2 class="card-title">ProLiteracy — The Impossible Bedtime Story</h2>
+                        <p class="card-desc">Machine learning voice cloning enabling parents to narrate stories regardless of literacy level.</p>
+                    </div>
+                </article>
 
-            <article class="project">
-                <h2 class="project-title">ATLASSIAN - DREAMKEEPER</h2>
-                <p class="project-desc">AI-powered web app converting dreams into animated visuals using Stable Diffusion and GPT-3.</p>
-                <img src="images/projects/atlassian-dreamkeeper.gif" alt="Atlassian Dreamkeeper" class="project-image">
-            </article>
+                <article class="card" data-reveal>
+                    <a class="card-media" href="#">
+                        <img src="images/projects/atlassian-dreamkeeper.gif" alt="Atlassian Dreamkeeper" loading="lazy">
+                    </a>
+                    <div class="card-meta">
+                        <span class="card-cat">Generative AI</span>
+                        <h2 class="card-title">Atlassian — Dreamkeeper</h2>
+                        <p class="card-desc">AI-powered web app converting dreams into animated visuals using Stable Diffusion and GPT-3.</p>
+                    </div>
+                </article>
 
-            <article class="project">
-                <h2 class="project-title">FORAGER</h2>
-                <p class="project-desc">Multi-sensorial journey into the mycological universe with room-scale VR. SXSW 2023 premiere.</p>
-                <video src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/forager.mp4" poster="images/projects/forager.jpg" playsinline class="project-image"></video>
-            </article>
+                <article class="card" data-reveal>
+                    <a class="card-media" href="#">
+                        <img src="images/projects/procession-ar.gif" alt="Procession AR" loading="lazy">
+                    </a>
+                    <div class="card-meta">
+                        <span class="card-cat">Augmented Reality</span>
+                        <h2 class="card-title">Procession AR</h2>
+                        <p class="card-desc">Interactive augmented reality artwork addressing climate change. Tribeca Film Festival Immersive 2021. Featured at Google I/O 2022.</p>
+                    </div>
+                </article>
 
-            <article class="project">
-                <h2 class="project-title">IMMERSIVE OOH</h2>
-                <p class="project-desc">Next-generation out-of-home advertising experiences blending physical and digital worlds.</p>
-                <img src="images/projects/ImmersiveOOHpng.png" alt="Immersive OOH" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">PROCESSION AR</h2>
-                <p class="project-desc">Interactive augmented reality artwork addressing climate change. Tribeca Film Festival Immersive 2021. Featured at Google I/O 2022.</p>
-                <img src="images/projects/procession-ar.gif" alt="Procession AR" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">HENNESSY - UNFINISHED BUSINESS</h2>
-                <p class="project-desc">COVID-19 relief fund supporting Black, Asian, and Latinx small-business owners.</p>
-                <img src="images/projects/hennessy-unfinished-business.jpg" alt="Hennessy Unfinished Business" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">BROADWAY CARES - SING STREET GROUNDED</h2>
-                <p class="project-desc">Collaborative streaming performance during pandemic lockdown. One Club for Creativity Winner 2021.</p>
-                <img src="images/projects/sing-street.jpg" alt="Sing Street Grounded" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">LIVING DISTANCE</h2>
-                <p class="project-desc">Documentary and VR experience of crystalline robotic sculpture commissioned for Blue Origin spaceflight. Sundance New Frontier 2020.</p>
-                <img src="images/projects/living-distance.jpg" alt="Living Distance" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">THORNE - THE FRONTIER WITHIN</h2>
-                <p class="project-desc">Biometrics-driven WebGL immersive installation exploring personal health data.</p>
-                <img src="images/projects/thorne1.jpg" alt="Thorne" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">NEW MUSEUM - 40TH ANNIVERSARY</h2>
-                <p class="project-desc">"New Museum LIVE" featuring five exhibitions, artworks, events, and performances livestreamed and broadcast across NYC.</p>
-                <img src="images/projects/newmuseum.gif" alt="New Museum" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">MAILCHIMP PRESENTS</h2>
-                <p class="project-desc">Short-form series, pilots, films, and podcasts for entrepreneur-focused education platform.</p>
-                <img src="images/projects/mailchimp-presents.jpg" alt="Mailchimp Presents" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">MAILCHIMP - DID YOU MEAN?</h2>
-                <p class="project-desc">Multipart cultural campaign. Cannes Lions Grand Prix Winner 2017.</p>
-                <img src="images/projects/mailchimp-didyoumean.jpg" alt="Mailchimp Did You Mean" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">HENNESSY - MAJOR</h2>
-                <p class="project-desc">Campaign documenting cyclist Major Taylor, first African American world champion. Visual narrative exploring competitive drive.</p>
-                <img src="images/projects/hennessy-major.jpg" alt="Hennessy Major" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">TREE VR</h2>
-                <p class="project-desc">Transform you into a rainforest tree with mixed-reality experience. Webby Award Winner 2018. 100,000+ views across IMAX theaters globally.</p>
-                <img src="images/projects/tree-vr.jpg" alt="Tree VR" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">NEW YORK TIMES - THE DAILY 360</h2>
-                <p class="project-desc">Daily 360-degree immersive video series with Samsung. Puts you at the center of the scene.</p>
-                <img src="images/projects/nyt-daily-360.png" alt="NYT Daily 360" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">DROGA5 - D5X</h2>
-                <p class="project-desc">Creative direction for agency's tenth anniversary festival celebrating optimistic creative mindset.</p>
-                <img src="images/projects/droga5-d5x.jpg" alt="Droga5 D5X" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">HENNESSY VSOP - MASTERED FROM CHAOS</h2>
-                <p class="project-desc">Film and immersive online experience integrating live action, LiDAR, 3D point clouds, and interactive sound. Cannes Lions and Webby Award Winner 2017.</p>
-                <img src="images/projects/hennessy-vsop.jpg" alt="Hennessy VSOP" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">UNDER ARMOUR - SLAY YOUR NEXT GIANT</h2>
-                <p class="project-desc">Match-cut film with simultaneous multi-video WebGL experience. Cannes Lions Grand Prix and Awwwards Winner 2016.</p>
-                <img src="images/projects/under-armour-slay.jpg" alt="Under Armour Slay Your Next Giant" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">GOOGLE ANDROID - PAPER PLANES</h2>
-                <p class="project-desc">Interactive web app for cross-platform paper plane throwing. Cannes Lions Grand Prix Winner 2017. 1M+ planes thrown, 158 countries participated.</p>
-                <img src="images/projects/google-paper-planes.gif" alt="Google Paper Planes" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">UNDER ARMOUR - I WILL WHAT I WANT</h2>
-                <p class="project-desc">Real-time social commentary featuring athlete. Cannes Lions Cyber Grand Prix and Webby Award Winner 2015.</p>
-                <img src="images/projects/under-armour-iwwiw.jpg" alt="Under Armour I Will What I Want" class="project-image">
-            </article>
-
-            <article class="project">
-                <h2 class="project-title">UNICEF - TAP PROJECT</h2>
-                <p class="project-desc">Mobile experience challenging phone abstinence. FWA Winner 2014. Raised $1.6M for water crisis relief with 2.5M participants.</p>
-                <img src="images/projects/unicef-tap.png" alt="UNICEF Tap Project" class="project-image">
-            </article>
+                <article class="card card--wide" data-reveal>
+                    <a class="card-media" href="#">
+                        <video muted loop playsinline preload="none"
+                               poster="images/projects/forager.jpg"
+                               data-src="https://pub-64f6de2de05f4983ac3f6267d52b3b72.r2.dev/forager.mp4"></video>
+                    </a>
+                    <div class="card-meta">
+                        <span class="card-cat">Room-scale VR</span>
+                        <h2 class="card-title">Forager</h2>
+                        <p class="card-desc">Multi-sensorial journey into the mycological universe with room-scale VR. SXSW 2023 premiere.</p>
+                    </div>
+                </article>
+            </div>
         </section>
 
-        <section class="contact" id="contact">
-            <h2 class="section-title">CONTACT</h2>
-            <div class="contact-content">
-                <a href="mailto:hello@justindurazzo.com" class="contact-email">justindurazzo@gmail.com</a>
-                <p class="contact-location">Brooklyn, New York</p>
-                <div class="contact-social">
-                    <a href="http://instagram.com/justin.durazzo" target="_blank" rel="noopener">Instagram</a>
-                    <a href="https://linkedin.com/in/justindurazzo" target="_blank" rel="noopener">LinkedIn</a>
-                </div>
-            
+        <!-- Archive — the full body of work -->
+        <section class="archive" id="archive">
+            <div class="work-head" data-reveal>
+                <span class="work-label">Archive</span>
+                <span class="work-count">Selected · 2014 — 2024</span>
+            </div>
+            <div class="archive-grid">
+                <a class="tile" href="#" data-full="Multi-modal marketing workflow bridging research through optimization across projects."><div class="tile-media"><img src="images/projects/song-ai.jpg" alt="Accenture Song AI" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">AI Workflow · 2024</span><h3 class="tile-title">Accenture Song AI</h3></div></a>
+                <a class="tile" href="#" data-full="Next-generation out-of-home advertising experiences blending physical and digital worlds."><div class="tile-media"><img src="images/projects/ImmersiveOOHpng.png" alt="Immersive OOH" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Out-of-Home · 2023</span><h3 class="tile-title">Immersive OOH</h3></div></a>
+                <a class="tile" href="#" data-full="Biometrics-driven WebGL immersive installation exploring personal health data."><div class="tile-media"><img src="images/projects/thorne1.jpg" alt="Thorne — The Frontier Within" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">WebGL Installation · 2021</span><h3 class="tile-title">Thorne — The Frontier Within</h3></div></a>
+                <a class="tile" href="#" data-full="COVID-19 relief fund supporting Black, Asian, and Latinx small-business owners."><div class="tile-media"><img src="images/projects/hennessy-unfinished-business.jpg" alt="Hennessy — Unfinished Business" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Social Impact · 2021</span><h3 class="tile-title">Hennessy — Unfinished Business</h3></div></a>
+                <a class="tile" href="#" data-full="Collaborative streaming performance during pandemic lockdown. One Club for Creativity Winner 2021."><div class="tile-media"><img src="images/projects/sing-street.jpg" alt="Broadway Cares — Sing Street Grounded" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Live Performance · 2021</span><h3 class="tile-title">Sing Street Grounded</h3></div></a>
+                <a class="tile" href="#" data-full="Documentary and VR experience of crystalline robotic sculpture commissioned for Blue Origin spaceflight. Sundance New Frontier 2020."><div class="tile-media"><img src="images/projects/living-distance.jpg" alt="Living Distance" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">VR Film · 2020</span><h3 class="tile-title">Living Distance</h3></div></a>
+                <a class="tile" href="#" data-full="Creative direction for agency's tenth anniversary festival celebrating optimistic creative mindset."><div class="tile-media"><img src="images/projects/droga5-d5x.jpg" alt="Droga5 — D5X" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Creative Direction · 2019</span><h3 class="tile-title">Droga5 — D5X</h3></div></a>
+                <a class="tile" href="#" data-full="Short-form series, pilots, films, and podcasts for entrepreneur-focused education platform."><div class="tile-media"><img src="images/projects/mailchimp-presents.jpg" alt="Mailchimp Presents" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Content Series · 2019</span><h3 class="tile-title">Mailchimp Presents</h3></div></a>
+                <a class="tile" href="#" data-full="Transform you into a rainforest tree with mixed-reality experience. Webby Award Winner 2018. 100,000+ views across IMAX theaters globally."><div class="tile-media"><img src="images/projects/tree-vr.jpg" alt="Tree VR" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Mixed Reality · 2018</span><h3 class="tile-title">Tree VR</h3></div></a>
+                <a class="tile" href="#" data-full="Campaign documenting cyclist Major Taylor, first African American world champion. Visual narrative exploring competitive drive."><div class="tile-media"><img src="images/projects/hennessy-major.jpg" alt="Hennessy — Major" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Film · 2018</span><h3 class="tile-title">Hennessy — Major</h3></div></a>
+                <a class="tile" href="#" data-full="&quot;New Museum LIVE&quot; featuring five exhibitions, artworks, events, and performances livestreamed and broadcast across NYC."><div class="tile-media"><img src="images/projects/newmuseum.gif" alt="New Museum — 40th Anniversary" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Livestream · 2017</span><h3 class="tile-title">New Museum — 40th</h3></div></a>
+                <a class="tile" href="#" data-full="Multipart cultural campaign. Cannes Lions Grand Prix Winner 2017."><div class="tile-media"><img src="images/projects/mailchimp-didyoumean.jpg" alt="Mailchimp — Did You Mean?" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Campaign · Cannes GP 2017</span><h3 class="tile-title">Mailchimp — Did You Mean?</h3></div></a>
+                <a class="tile" href="#" data-full="Film and immersive online experience integrating live action, LiDAR, 3D point clouds, and interactive sound. Cannes Lions and Webby Award Winner 2017."><div class="tile-media"><img src="images/projects/hennessy-vsop.jpg" alt="Hennessy VSOP — Mastered From Chaos" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Immersive Film · 2017</span><h3 class="tile-title">Hennessy VSOP — Mastered From Chaos</h3></div></a>
+                <a class="tile" href="#" data-full="Interactive web app for cross-platform paper plane throwing. Cannes Lions Grand Prix Winner 2017. 1M+ planes thrown, 158 countries participated."><div class="tile-media"><img src="images/projects/google-paper-planes.gif" alt="Google Android — Paper Planes" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Interactive · Cannes GP 2017</span><h3 class="tile-title">Google — Paper Planes</h3></div></a>
+                <a class="tile" href="#" data-full="Daily 360-degree immersive video series with Samsung. Puts you at the center of the scene."><div class="tile-media"><img src="images/projects/nyt-daily-360.png" alt="New York Times — The Daily 360" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">360° Video · 2016</span><h3 class="tile-title">NYT — The Daily 360</h3></div></a>
+                <a class="tile" href="#" data-full="Match-cut film with simultaneous multi-video WebGL experience. Cannes Lions Grand Prix and Awwwards Winner 2016."><div class="tile-media"><img src="images/projects/under-armour-slay.jpg" alt="Under Armour — Slay Your Next Giant" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">WebGL Film · Cannes GP 2016</span><h3 class="tile-title">Under Armour — Slay Your Next Giant</h3></div></a>
+                <a class="tile" href="#" data-full="Real-time social commentary featuring athlete. Cannes Lions Cyber Grand Prix and Webby Award Winner 2015."><div class="tile-media"><img src="images/projects/under-armour-iwwiw.jpg" alt="Under Armour — I Will What I Want" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Social · Cyber GP 2015</span><h3 class="tile-title">Under Armour — I Will What I Want</h3></div></a>
+                <a class="tile" href="#" data-full="Mobile experience challenging phone abstinence. FWA Winner 2014. Raised $1.6M for water crisis relief with 2.5M participants."><div class="tile-media"><img src="images/projects/unicef-tap.png" alt="UNICEF — Tap Project" loading="lazy"></div><div class="tile-meta"><span class="tile-cat">Mobile · 2014</span><h3 class="tile-title">UNICEF — Tap Project</h3></div></a>
+            </div>
+        </section>
+
+        <!-- Closing / contact -->
+        <section class="outro" id="contact">
+            <p class="outro-eyebrow" data-reveal>Let's build something</p>
+            <a href="mailto:justindurazzo@gmail.com" class="outro-mail" data-reveal>justindurazzo@gmail.com</a>
+            <div class="outro-links" data-reveal>
+                <a href="http://instagram.com/justin.durazzo" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://linkedin.com/in/justindurazzo" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="/classic">Classic site</a>
             </div>
         </section>
     </main>
 
-  <footer class="footer">
-    <a href="#" class="back-to-top">Back to Top</a>
-    <p>&copy; 2025 Justin Durazzo</p>
-</footer>
+    <footer class="foot">
+        <span>© 2025 Justin Durazzo</span>
+        <span>AI &amp; Immersive Design</span>
+    </footer>
 
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-indicator" id="scrollIndicator">
-        <div class="scroll-indicator-track" id="scrollTrack"></div>
+    <!-- Project lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">Close ✕</button>
+        <div class="lightbox-inner">
+            <div class="lightbox-media" id="lightboxMedia"></div>
+            <div class="lightbox-meta">
+                <span class="lightbox-cat" id="lightboxCat"></span>
+                <h2 class="lightbox-title" id="lightboxTitle"></h2>
+                <p class="lightbox-desc" id="lightboxDesc"></p>
+            </div>
+        </div>
     </div>
 
     <script src="lenis.min.js"></script>
-    <script src="script.js"></script>
+    <script src="alt.js"></script>
 </body>
 </html>
