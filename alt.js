@@ -168,7 +168,7 @@ const videoObserver = new IntersectionObserver((entries) => {
             if (v.src) v.pause();
         }
     });
-}, { threshold: 0.35 });
+}, { threshold: 0, rootMargin: '700px 0px 700px 0px' });   // preload & start a screen early
 
 cardVideos.forEach((v) => {
     if (managed(v)) {
