@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://justindurazzo.com/</loc>
-    <lastmod>2026-03-15</lastmod>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://justindurazzo.com/about.html</loc>
-    <lastmod>2026-03-15</lastmod>
-    <priority>0.8</priority>
-  </url>
+  <url><loc>https://justindurazzo.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://justindurazzo.com/about</loc><priority>0.8</priority></url>
+  <url><loc>https://justindurazzo.com/work/hennessy-vsop</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/under-armour</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/sing-street</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/living-distance</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/d5x</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/tree-vr</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/new-museum</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/thorne</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/defender</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/procession</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/nyt-story-portrait</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/atlassian-dreamkeeper</loc><priority>0.7</priority></url>
+  <url><loc>https://justindurazzo.com/work/forager</loc><priority>0.7</priority></url>
 </urlset>
