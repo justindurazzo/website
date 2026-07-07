@@ -307,3 +307,39 @@ if (sideNav && featured.length) {
         visObs.observe(work);
     }
 }
+
+// ---------- Treadmill roll — panels curl over a roller just under the nav ----------
+if (!reduce && !isTouch) {
+    const rollEls = Array.prototype.slice.call(document.querySelectorAll('.card, .tile'));
+    if (rollEls.length) {
+        const FOLD = 96;        // roller line (px from top), just below the nav
+        const BAND = 320;       // distance over which a panel curls into the roller
+        const MAX_ANGLE = 70;   // degrees of backward curl at the fold
+        // drive transform ourselves (no easing) so it tracks scroll 1:1
+        rollEls.forEach((el) => { el.style.transition = 'opacity 0.6s cubic-bezier(0.16,1,0.3,1)'; });
+
+        let ticking = false;
+        const update = () => {
+            ticking = false;
+            for (let i = 0; i < rollEls.length; i++) {
+                const el = rollEls[i];
+                const rect = el.getBoundingClientRect();
+                const top = rect.top;
+                if (top > FOLD + BAND || rect.bottom < -50) {
+                    if (el.style.transform) { el.style.transform = ''; el.style.opacity = ''; }
+                    continue;
+                }
+                const prog = (FOLD + BAND - top) / BAND;     // 0 at band start → 1 at fold → >1 past
+                const angle = Math.min(prog, 1) * MAX_ANGLE;
+                el.style.transformOrigin = '50% 0%';
+                el.style.transform = 'perspective(1200px) rotateX(' + (-angle) + 'deg)';
+                el.style.opacity = prog > 1 ? String(Math.max(0, 1 - (prog - 1) * 1.6)) : '';
+            }
+        };
+        const request = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+        window.addEventListener('scroll', request, { passive: true });
+        window.addEventListener('resize', request);
+        if (lenis) lenis.on('scroll', request);
+        setTimeout(request, 100);
+    }
+}
