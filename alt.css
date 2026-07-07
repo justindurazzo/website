@@ -1,5 +1,5 @@
 /* ============================================================
-   Justin Durazzo — ALT landing (MLF-inspired, cinematic)
+   Justin Durazzo, ALT landing (MLF-inspired, cinematic)
    ============================================================ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -20,7 +20,7 @@
     --placeholder: #161614;   /* media placeholder */
 }
 
-/* Light mode — swap the palette; media still carries the color */
+/* Light mode, swap the palette; media still carries the color */
 body.light {
     --bg: #efece3;
     --ink: #18160f;

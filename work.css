@@ -1,5 +1,5 @@
 /* ============================================================
-   Case-study pages — loaded alongside alt.css (shares nav,
+   Case-study pages, loaded alongside alt.css (shares nav,
    footer, fonts, theme vars, sound). Cohesive template used by
    every project deep-dive so they read as one system.
    ============================================================ */
@@ -107,6 +107,6 @@
 [data-reveal].in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } }
 
-/* constrained, centered media — for smaller-resolution or portrait assets */
+/* constrained, centered media, for smaller-resolution or portrait assets */
 .cs-media--mid { padding: 6vh var(--pad); }
 .cs-media--mid img, .cs-media--mid video { max-width: 480px; width: 100%; margin: 0 auto; display: block; }

@@ -816,7 +816,7 @@ body.dark-mode .scroll-indicator-dot.active {
 
 /* ==================================================== */
 /* Aaru-inspired polish  (smooth scroll · kinetic type · */
-/* custom cursor · media motion) — pure-mono, restrained */
+/* custom cursor · media motion), pure-mono, restrained */
 /* ==================================================== */
 :root {
     /* one shared expressive easing across the whole site */
@@ -867,7 +867,7 @@ html.lenis { scroll-behavior: auto; }
 /* ==================== */
 /* Project reveal refinement */
 /* ==================== */
-/* container no longer just slides — media does a clip reveal, */
+/* container no longer just slides, media does a clip reveal, */
 /* title rides up out of a mask, desc fades with a touch of blur */
 .project { transform: translateY(40px); }
 
@@ -908,7 +908,7 @@ body.dark-mode .project-media { background: #1a1a1a; }
 }
 
 /* ==================== */
-/* Media cursor — a 'View / Play' bubble that appears only over project */
+/* Media cursor, a 'View / Play' bubble that appears only over project */
 /* media; the native system cursor is used everywhere else.             */
 /* ==================== */
 .cursor {                       /* zero-size positioning layer (JS moves it) */

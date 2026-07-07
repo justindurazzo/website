@@ -63,7 +63,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 
 // ============================================================
-// Lenis smooth scroll  (buttery momentum — the core "aaru feel")
+// Lenis smooth scroll  (buttery momentum, the core "aaru feel")
 // ============================================================
 let lenis = null;
 function initLenis() {
@@ -83,7 +83,7 @@ function initLenis() {
     window.lenis = lenis;
 }
 
-// Unified scroll helper — routes through Lenis when available
+// Unified scroll helper, routes through Lenis when available
 function scrollToTarget(target, offset = -80) {
     if (lenis) {
         lenis.scrollTo(target, { offset, duration: 1.2 });
@@ -133,11 +133,11 @@ function wrapLine(el) {
 function setupReveals() {
     if (prefersReducedMotion) return;
 
-    // Intro paragraph — word-by-word
+    // Intro paragraph, word-by-word
     const introText = document.querySelector('.intro-text');
     if (introText) wrapWords(introText);
 
-    // Project titles — single masked line
+    // Project titles, single masked line
     document.querySelectorAll('.project-title').forEach((title) => {
         // skip if it wraps a link (keep the anchor intact)
         if (title.querySelector('a')) return;
@@ -146,7 +146,7 @@ function setupReveals() {
 }
 
 // ============================================================
-// Project media — wrap for clip-reveal + enable hover-to-play
+// Project media, wrap for clip-reveal + enable hover-to-play
 // ============================================================
 function setupProjectMedia() {
     document.querySelectorAll('.project').forEach((project) => {
@@ -186,7 +186,7 @@ function setupProjectMedia() {
 }
 
 // ============================================================
-// Media cursor — a 'View / Play' bubble over project media only.
+// Media cursor, a 'View / Play' bubble over project media only.
 // The native system cursor is used everywhere else.
 // ============================================================
 function initMediaCursor() {
