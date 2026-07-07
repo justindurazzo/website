@@ -76,7 +76,7 @@
 
 /* ---- two-up grid ---- */
 .cs-grid { padding: 0 var(--pad); display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; margin: 5vh 0; }
-.cs-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cs-grid img, .cs-grid video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cs-grid--three { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 760px) { .cs-grid, .cs-grid--three { grid-template-columns: 1fr; } }
 
