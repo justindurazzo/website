@@ -168,22 +168,9 @@ const videoObserver = new IntersectionObserver((entries) => {
             if (v.src) v.pause();
         }
     });
-}, { threshold: 0, rootMargin: '400px 0px 400px 0px' });   // start buffering ~a screen early
+}, { threshold: 0.35 });
 
 cardVideos.forEach((v) => {
-    // keep the poster visible (as the wrapper's background) and fade the video
-    // in only once it actually has a frame — no black flash during buffering/seek
-    const poster = v.getAttribute('poster');
-    if (poster) {
-        const wrap = v.parentElement;
-        wrap.style.backgroundImage = 'url("' + poster.replace(/"/g, '%22') + '")';
-        wrap.style.backgroundSize = 'cover';
-        wrap.style.backgroundPosition = 'center';
-    }
-    const revealVideo = () => { if (v.readyState >= 2) v.classList.add('is-ready'); };
-    v.addEventListener('timeupdate', revealVideo);   // fires only while a frame is actually displaying
-    v.addEventListener('seeked', revealVideo);
-
     if (managed(v)) {
         v.loop = false; // we manage the loop so it returns to the chosen in-point
         v.addEventListener('loadedmetadata', () => seekTo(v, firstStartOf(v)));
