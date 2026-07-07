@@ -675,3 +675,44 @@ body.lb-open { overflow: hidden; }
     .about-block { grid-template-columns: 1fr; gap: 18px; padding: 5vh 0; }
     .about-label { position: static; }
 }
+
+/* ---------- Lab (external experiments & side projects) ---------- */
+.lab { padding: 0 var(--pad) 8vh; }
+.lab-list { border-top: 1px solid var(--line); }
+.lab-item {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding: 24px 4px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    transition: padding-left 0.4s var(--ease);
+}
+.lab-name {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(22px, 2.6vw, 36px);
+    letter-spacing: -0.015em;
+    line-height: 1;
+}
+.lab-host {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    transition: color 0.3s ease;
+}
+.lab-arrow {
+    margin-left: auto;
+    font-family: var(--sans);
+    font-size: 20px;
+    color: var(--muted);
+    transition: transform 0.4s var(--ease), color 0.3s ease;
+}
+.lab-item:hover { padding-left: 14px; }
+.lab-item:hover .lab-host { color: var(--muted); }
+.lab-item:hover .lab-arrow { transform: translate(4px, -4px); color: var(--ink); }
+@media (max-width: 640px) {
+    .lab-item { gap: 12px; padding: 18px 2px; }
+    .lab-host { display: none; }
+}
