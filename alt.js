@@ -249,6 +249,8 @@ if (lightbox) {
 
     document.querySelectorAll('.card, .tile').forEach((el) => {
         el.addEventListener('click', (e) => {
+            const href = el.getAttribute('href');
+            if (href && href.indexOf('/work/') === 0) return; // case-study page — let it navigate
             e.preventDefault();
             open(el);
         });

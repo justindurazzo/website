@@ -1,0 +1,108 @@
+/* ============================================================
+   Case-study pages — loaded alongside alt.css (shares nav,
+   footer, fonts, theme vars, sound). Cohesive template used by
+   every project deep-dive so they read as one system.
+   ============================================================ */
+
+.cs-hero {
+    padding: 24vh var(--pad) 8vh;
+    max-width: 1180px;
+}
+.cs-cat {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+}
+.cs-title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(34px, 6vw, 82px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 34px;
+    max-width: 15ch;
+}
+.cs-title em { font-style: italic; font-weight: 400; }
+.cs-dek {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(20px, 2.3vw, 30px);
+    line-height: 1.34;
+    color: var(--muted);
+    max-width: 30ch;
+}
+
+.cs-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 34px 64px;
+    margin-top: 7vh;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+}
+.cs-meta-item { display: flex; flex-direction: column; gap: 9px; }
+.cs-meta-label {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);
+}
+.cs-meta-val { font-size: 15px; color: var(--ink); max-width: 30ch; line-height: 1.5; }
+
+/* ---- media blocks ---- */
+.cs-media { margin: 5vh 0; padding: 0 var(--pad); }
+.cs-media--full { padding: 0; margin: 6vh 0; }   /* edge to edge */
+.cs-media img, .cs-media video { width: 100%; height: auto; display: block; }
+.cs-embed { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+.cs-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.cs-cap { padding: 12px var(--pad) 0; font-size: 12px; letter-spacing: 0.04em; color: var(--faint); }
+.cs-media--full .cs-cap { padding-left: var(--pad); padding-right: var(--pad); }
+
+/* ---- text blocks ---- */
+.cs-text { padding: 7vh var(--pad); max-width: 780px; }
+.cs-text p {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.42;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 24px;
+}
+.cs-text p + p { font-family: var(--sans); font-weight: 400; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.6; color: var(--muted); letter-spacing: 0; }
+.cs-text p:last-child { margin-bottom: 0; }
+.cs-text em { font-style: italic; }
+
+.cs-label { padding: 0 var(--pad); margin: 8vh 0 3vh; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+
+/* ---- two-up grid ---- */
+.cs-grid { padding: 0 var(--pad); display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; margin: 5vh 0; }
+.cs-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cs-grid--three { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 760px) { .cs-grid, .cs-grid--three { grid-template-columns: 1fr; } }
+
+/* ---- credits ---- */
+.cs-credits {
+    padding: 9vh var(--pad);
+    border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: 1fr 2fr; gap: 4vw;
+    max-width: 1100px;
+}
+.cs-credits-list { color: var(--muted); line-height: 1.95; font-size: 15px; }
+.cs-credits-list b { color: var(--ink); font-weight: 500; }
+@media (max-width: 760px) { .cs-credits { grid-template-columns: 1fr; gap: 20px; } }
+
+/* ---- footer nav between projects ---- */
+.cs-next { padding: 8vh var(--pad) 12vh; border-top: 1px solid var(--line); }
+.cs-next-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px; display: block; }
+.cs-next a {
+    font-family: var(--display); font-weight: 300;
+    font-size: clamp(28px, 5vw, 60px); letter-spacing: -0.02em; line-height: 1;
+    display: inline-flex; align-items: baseline; gap: 18px;
+}
+.cs-next a .arw { font-family: var(--sans); font-size: 0.5em; color: var(--muted); transition: transform 0.4s var(--ease); }
+.cs-next a:hover .arw { transform: translateX(8px); }
+
+/* reveal (uses alt.js [data-reveal] observer) */
+[data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+[data-reveal].in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } }
