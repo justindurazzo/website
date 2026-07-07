@@ -265,7 +265,9 @@ if (lightbox) {
 
     document.querySelectorAll('.card, .tile').forEach((el) => {
         el.addEventListener('click', (e) => {
-            const href = el.getAttribute('href');
+            // the link may be the element itself (.tile) or nested (.card > a.card-media)
+            const linkEl = el.tagName === 'A' ? el : el.querySelector('a[href]');
+            const href = linkEl ? linkEl.getAttribute('href') : null;
             if (href && href.indexOf('/work/') === 0) return; // case-study page, let it navigate
             e.preventDefault();
             open(el);
