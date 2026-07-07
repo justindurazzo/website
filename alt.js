@@ -4,6 +4,9 @@
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 
+// Restore the visitor's saved theme before first paint (persists across pages).
+try { if (localStorage.getItem('theme') === 'light' && document.body) document.body.classList.add('light'); } catch (e) {}
+
 // ---------- Sound design (ported from justindurazzo.com) ----------
 const SPEAKER_ON = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
 const SPEAKER_OFF = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
@@ -114,14 +117,18 @@ window.addEventListener('DOMContentLoaded', () => {
     const soundToggle = document.getElementById('soundToggle');
     if (soundToggle) soundToggle.addEventListener('click', () => SoundFX.toggle());
 
-    // theme toggle (dark ⇆ light), icon shows the mode you'll switch TO
-    const SUN = document.querySelector('#themeToggle svg').outerHTML;
-    const MOON = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2c-1.05 0-2.05.16-3 .46 4.06 1.27 7 5.06 7 9.54 0 4.48-2.94 8.27-7 9.54.95.3 1.95.46 3 .46 5.52 0 10-4.48 10-10S14.52 2 9 2z"/></svg>';
+    // theme toggle (dark to light), icon shows the mode you'll switch TO
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
+        const svgEl = themeToggle.querySelector('svg');
+        const SUN = svgEl ? svgEl.outerHTML : '';
+        const MOON = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2c-1.05 0-2.05.16-3 .46 4.06 1.27 7 5.06 7 9.54 0 4.48-2.94 8.27-7 9.54.95.3 1.95.46 3 .46 5.52 0 10-4.48 10-10S14.52 2 9 2z"/></svg>';
+        // reflect the restored theme in the icon
+        if (document.body.classList.contains('light')) themeToggle.innerHTML = MOON;
         themeToggle.addEventListener('click', () => {
             const light = document.body.classList.toggle('light');
             themeToggle.innerHTML = light ? MOON : SUN;
+            try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
         });
     }
 });
@@ -163,7 +170,12 @@ const videoObserver = new IntersectionObserver((entries) => {
             const start = firstStartOf(v);
             if (start > 0 && v.readyState >= 1 && !v.dataset.looped && v.currentTime < start) seekTo(v, start);
             const p = v.play();
-            if (p && p.catch) p.catch(() => {});
+            if (p && p.catch) p.catch(() => {
+                // Autoplay refused (e.g. iOS Low Power Mode / Data Saver): show the
+                // poster frame instead of an empty box. On normal playback no poster
+                // is ever set, so there is no thumbnail flash before the loop.
+                if (v.dataset.poster && !v.getAttribute('poster')) v.setAttribute('poster', v.dataset.poster);
+            });
         } else {
             if (v.src) v.pause();
         }
@@ -200,8 +212,12 @@ if (lightbox) {
     const lbTitle = document.getElementById('lightboxTitle');
     const lbDesc = document.getElementById('lightboxDesc');
     const lbClose = document.getElementById('lightboxClose');
+    let clearTimer = null;   // pending media-clear timeout (cancel on fast reopen)
+    let lbOpener = null;     // element to restore focus to when the dialog closes
 
     const open = (el) => {
+        clearTimeout(clearTimer);   // cancel any pending media-clear from a fast close then reopen
+        lbOpener = el;
         const titleEl = el.querySelector('.card-title, .tile-title');
         const catEl = el.querySelector('.card-cat, .tile-cat');
         const descEl = el.querySelector('.card-desc');
@@ -234,14 +250,17 @@ if (lightbox) {
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.classList.add('lb-open');
         if (lenis) lenis.stop();
+        if (lbClose) lbClose.focus();   // move keyboard focus into the dialog
     };
 
     const close = () => {
         lightbox.classList.remove('open');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('lb-open');
-        setTimeout(() => { lbMedia.innerHTML = ''; }, 450); // stop playback after fade-out
+        clearTimer = setTimeout(() => { lbMedia.innerHTML = ''; }, 450); // stop playback after fade-out
         if (lenis) lenis.start();
+        if (lbOpener && lbOpener.focus) lbOpener.focus();   // restore focus to the opener
+        lbOpener = null;
     };
 
     document.querySelectorAll('.card, .tile').forEach((el) => {

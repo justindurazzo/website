@@ -6,7 +6,7 @@ const SoundFX = {
     volume: 0.15,
 
     init() {
-        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        try { this.audioContext = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { this.audioContext = null; }
         const savedPref = localStorage.getItem('soundEnabled');
         if (savedPref !== null) {
             this.enabled = savedPref === 'true';
