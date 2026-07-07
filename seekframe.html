@@ -1,0 +1,5 @@
+<!doctype html><meta charset=utf-8><body style="margin:0;background:#111">
+<video id=v muted playsinline preload=auto style="width:100vw;height:100vh;object-fit:contain" src="/images/projects/thorne-frontier-within.mp4"></video>
+<script>var v=document.getElementById('v');v.addEventListener('loadedmetadata',function(){v.currentTime=46;});</script>
+</body>HTML
+"$CHROME" --headless=new --disable-gpu --window-size=1000,560 --virtual-time-budget=9000 --screenshot="$SP/seek46.png" "http://localhost:8090/seekframe.html" 2>/dev/null; echo "shot exit=$?"; ls -la "$SP/seek46.png" 2>/dev/null | awk '{print $5}'; rm -f seekframe.html
