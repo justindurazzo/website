@@ -345,13 +345,13 @@ body.loaded [data-line] { transform: translateY(0); }
     transition: clip-path 1.1s var(--ease);
 }
 .tile.in .tile-media { clip-path: inset(0 0 0 0); }
-.tile-media img {
+.tile-media img, .tile-media video {
     width: 100%; height: 100%;
     object-fit: cover;
     transform: scale(1.05);
     transition: transform 1.2s var(--ease);
 }
-.tile:hover .tile-media img { transform: scale(1); }
+.tile:hover .tile-media img, .tile:hover .tile-media video { transform: scale(1); }
 .tile-meta {
     margin-top: 16px;
     opacity: 0;

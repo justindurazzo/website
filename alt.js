@@ -154,7 +154,7 @@ document.querySelectorAll('[data-reveal], .card, .tile').forEach((el) => revealO
 // data-start = first-play in-point; data-loop-start = in-point on every loop;
 // data-end = loop back once reached (so the preview loops just one section).
 // The click-to-watch lightbox always plays the full film from 0.
-const cardVideos = document.querySelectorAll('.card-media video[data-src]:not([data-static])');
+const cardVideos = document.querySelectorAll('.card-media video[data-src]:not([data-static]), .tile-media video[data-src]:not([data-static])');
 const firstStartOf = (v) => parseFloat(v.dataset.start) || 0;
 const loopStartOf = (v) => (v.dataset.loopStart != null ? parseFloat(v.dataset.loopStart) : firstStartOf(v)) || 0;
 const endOf = (v) => parseFloat(v.dataset.end) || 0;
