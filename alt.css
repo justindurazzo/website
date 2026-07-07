@@ -294,12 +294,6 @@ body.loaded [data-line] { transform: translateY(0); }
     transform: scale(1.04);
     transition: transform 1.4s var(--ease);
 }
-/* fade the video in over its poster once it has a real frame (no black flash) */
-.card-media video {
-    opacity: 0;
-    transition: transform 1.4s var(--ease), opacity 0.55s var(--ease);
-}
-.card-media video.is-ready { opacity: 1; }
 .card:hover .card-media video,
 .card:hover .card-media img { transform: scale(1.0); }
 
@@ -678,12 +672,25 @@ body.lb-open { overflow: hidden; }
 
 /* ---------- Lab (external experiments & side projects) ---------- */
 .lab { padding: 0 var(--pad) 8vh; }
-.lab-list { border-top: 1px solid var(--line); }
+.lab-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4vw;
+}
+.lab-col-label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+}
 .lab-item {
     display: flex;
     align-items: baseline;
     gap: 20px;
-    padding: 24px 4px;
+    padding: 22px 4px;
     border-bottom: 1px solid var(--line);
     color: var(--ink);
     transition: padding-left 0.4s var(--ease);
@@ -691,9 +698,9 @@ body.lb-open { overflow: hidden; }
 .lab-name {
     font-family: var(--display);
     font-weight: 400;
-    font-size: clamp(22px, 2.6vw, 36px);
+    font-size: clamp(20px, 2vw, 30px);
     letter-spacing: -0.015em;
-    line-height: 1;
+    line-height: 1.05;
 }
 .lab-host {
     font-size: 11px;
@@ -712,7 +719,7 @@ body.lb-open { overflow: hidden; }
 .lab-item:hover { padding-left: 14px; }
 .lab-item:hover .lab-host { color: var(--muted); }
 .lab-item:hover .lab-arrow { transform: translate(4px, -4px); color: var(--ink); }
+@media (max-width: 760px) { .lab-cols { grid-template-columns: 1fr; gap: 5vh; } }
 @media (max-width: 640px) {
     .lab-item { gap: 12px; padding: 18px 2px; }
-    .lab-host { display: none; }
 }

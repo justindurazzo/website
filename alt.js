@@ -144,12 +144,14 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-reveal], .card, .tile').forEach((el) => revealObserver.observe(el));
 
 // ---------- MLF-style autoplay previews (lazy + in-view) ----------
-// data-start = first-play in-point; data-loop-start = in-point on every loop
-// after the first playthrough (falls back to data-start when omitted).
-const cardVideos = document.querySelectorAll('.card-media video[data-src]');
+// data-start = first-play in-point; data-loop-start = in-point on every loop;
+// data-end = loop back once reached (so the preview loops just one section).
+// The click-to-watch lightbox always plays the full film from 0.
+const cardVideos = document.querySelectorAll('.card-media video[data-src]:not([data-static])');
 const firstStartOf = (v) => parseFloat(v.dataset.start) || 0;
 const loopStartOf = (v) => (v.dataset.loopStart != null ? parseFloat(v.dataset.loopStart) : firstStartOf(v)) || 0;
-const managed = (v) => firstStartOf(v) > 0 || v.dataset.loopStart != null;
+const endOf = (v) => parseFloat(v.dataset.end) || 0;
+const managed = (v) => firstStartOf(v) > 0 || v.dataset.loopStart != null || endOf(v) > 0;
 const seekTo = (v, t) => { try { v.currentTime = t; } catch (e) {} };
 
 const videoObserver = new IntersectionObserver((entries) => {
@@ -166,25 +168,20 @@ const videoObserver = new IntersectionObserver((entries) => {
             if (v.src) v.pause();
         }
     });
-}, { threshold: 0, rootMargin: '400px 0px 400px 0px' });   // start buffering ~a screen early
+}, { threshold: 0.35 });
 
 cardVideos.forEach((v) => {
-    // keep the poster visible (as the wrapper's background) and fade the video
-    // in only once it actually has a frame — no black flash during buffering/seek
-    const poster = v.getAttribute('poster');
-    if (poster) {
-        const wrap = v.parentElement;
-        wrap.style.backgroundImage = 'url("' + poster.replace(/"/g, '%22') + '")';
-        wrap.style.backgroundSize = 'cover';
-        wrap.style.backgroundPosition = 'center';
-    }
-    const revealVideo = () => { if (v.readyState >= 2) v.classList.add('is-ready'); };
-    v.addEventListener('timeupdate', revealVideo);   // fires only while a frame is actually displaying
-    v.addEventListener('seeked', revealVideo);
-
     if (managed(v)) {
         v.loop = false; // we manage the loop so it returns to the chosen in-point
         v.addEventListener('loadedmetadata', () => seekTo(v, firstStartOf(v)));
+        // loop back at the section end (data-end), otherwise at the real end
+        v.addEventListener('timeupdate', () => {
+            const end = endOf(v);
+            if (end > 0 && v.currentTime >= end) {
+                v.dataset.looped = '1';
+                seekTo(v, loopStartOf(v));
+            }
+        });
         v.addEventListener('ended', () => {
             v.dataset.looped = '1';           // subsequent loops use loopStart
             seekTo(v, loopStartOf(v));
@@ -310,38 +307,3 @@ if (sideNav && featured.length) {
     }
 }
 
-// ---------- Treadmill roll — panels curl over a roller just under the nav ----------
-if (!reduce && !isTouch) {
-    const rollEls = Array.prototype.slice.call(document.querySelectorAll('.card, .tile'));
-    if (rollEls.length) {
-        const FOLD = 96;        // roller line (px from top), just below the nav
-        const BAND = 320;       // distance over which a panel curls into the roller
-        const MAX_ANGLE = 70;   // degrees of backward curl at the fold
-        // drive transform ourselves (no easing) so it tracks scroll 1:1
-        rollEls.forEach((el) => { el.style.transition = 'opacity 0.6s cubic-bezier(0.16,1,0.3,1)'; });
-
-        let ticking = false;
-        const update = () => {
-            ticking = false;
-            for (let i = 0; i < rollEls.length; i++) {
-                const el = rollEls[i];
-                const rect = el.getBoundingClientRect();
-                const top = rect.top;
-                if (top > FOLD + BAND || rect.bottom < -50) {
-                    if (el.style.transform) { el.style.transform = ''; el.style.opacity = ''; }
-                    continue;
-                }
-                const prog = (FOLD + BAND - top) / BAND;     // 0 at band start → 1 at fold → >1 past
-                const angle = Math.min(prog, 1) * MAX_ANGLE;
-                el.style.transformOrigin = '50% 0%';
-                el.style.transform = 'perspective(1200px) rotateX(' + (-angle) + 'deg)';
-                el.style.opacity = prog > 1 ? String(Math.max(0, 1 - (prog - 1) * 1.6)) : '';
-            }
-        };
-        const request = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
-        window.addEventListener('scroll', request, { passive: true });
-        window.addEventListener('resize', request);
-        if (lenis) lenis.on('scroll', request);
-        setTimeout(request, 100);
-    }
-}
