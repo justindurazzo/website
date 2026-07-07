@@ -144,12 +144,14 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-reveal], .card, .tile').forEach((el) => revealObserver.observe(el));
 
 // ---------- MLF-style autoplay previews (lazy + in-view) ----------
-// data-start = first-play in-point; data-loop-start = in-point on every loop
-// after the first playthrough (falls back to data-start when omitted).
+// data-start = first-play in-point; data-loop-start = in-point on every loop;
+// data-end = loop back once reached (so the preview loops just one section).
+// The click-to-watch lightbox always plays the full film from 0.
 const cardVideos = document.querySelectorAll('.card-media video[data-src]');
 const firstStartOf = (v) => parseFloat(v.dataset.start) || 0;
 const loopStartOf = (v) => (v.dataset.loopStart != null ? parseFloat(v.dataset.loopStart) : firstStartOf(v)) || 0;
-const managed = (v) => firstStartOf(v) > 0 || v.dataset.loopStart != null;
+const endOf = (v) => parseFloat(v.dataset.end) || 0;
+const managed = (v) => firstStartOf(v) > 0 || v.dataset.loopStart != null || endOf(v) > 0;
 const seekTo = (v, t) => { try { v.currentTime = t; } catch (e) {} };
 
 const videoObserver = new IntersectionObserver((entries) => {
@@ -185,6 +187,14 @@ cardVideos.forEach((v) => {
     if (managed(v)) {
         v.loop = false; // we manage the loop so it returns to the chosen in-point
         v.addEventListener('loadedmetadata', () => seekTo(v, firstStartOf(v)));
+        // loop back at the section end (data-end), otherwise at the real end
+        v.addEventListener('timeupdate', () => {
+            const end = endOf(v);
+            if (end > 0 && v.currentTime >= end) {
+                v.dataset.looped = '1';
+                seekTo(v, loopStartOf(v));
+            }
+        });
         v.addEventListener('ended', () => {
             v.dataset.looped = '1';           // subsequent loops use loopStart
             seekTo(v, loopStartOf(v));
