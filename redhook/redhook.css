@@ -1,0 +1,398 @@
+/* ============================================================
+   THE RED HOOK FOCACCERIA, brand site
+   Dependency-free. Warm paper palette, heritage serif type.
+   Sections are marked with hyphen-rule banner comments below.
+   ============================================================ */
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Paper + ink */
+  --paper:      #f4efe3;   /* warm cream ground */
+  --paper-deep: #ece3d1;   /* panel / recessed */
+  --paper-edge: #e3d8c1;   /* hairline on paper */
+  --ink:        #2a2620;   /* body text */
+  --ink-soft:   #554f43;   /* secondary text */
+  --ink-faint:  #8a8069;   /* captions, meta */
+
+  /* Brand accents (pulled from the guidelines) */
+  --brick:   #9e2b25;   /* RED HOOK red */
+  --brick-d: #7c1d1a;   /* deep red */
+  --olive:   #3f4632;   /* FOCACCERIA green */
+  --olive-l: #5c6446;   /* muted olive */
+  --amber:   #d68a2c;   /* 1870 amber */
+  --gold:    #b6924f;   /* hairline gold */
+
+  --maxw: 1180px;
+  --gut: clamp(1.25rem, 5vw, 4rem);
+
+  --serif-display: "Playfair Display", "Times New Roman", Georgia, serif;
+  --serif-text:    "EB Garamond", Georgia, "Times New Roman", serif;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Reset / base ---------- */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  /* faint paper grain: layered soft radial specks */
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(120,90,40,0.035) 0, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(120,90,40,0.03) 0, transparent 45%);
+  color: var(--ink);
+  font-family: var(--serif-text);
+  font-size: clamp(1.02rem, 0.55vw + 0.9rem, 1.18rem);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gut); }
+
+/* ---------- Reveal mechanism ---------- */
+/* Content starts hidden and is shown when JS adds `loaded` to body and `.in`
+   to each element. The <noscript> block + inline failsafe guarantee it shows
+   even if JS never runs. Keep these class names in sync with the failsafe. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+[data-reveal].in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { transition: none; }
+}
+
+/* ---------- Ornaments ---------- */
+.rule-gold {
+  height: 1px; border: 0; margin: 0;
+  background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+  opacity: 0.7;
+}
+.wheat {
+  width: 26px; height: auto; color: var(--brick);
+  opacity: 0.9;
+}
+.divider {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  color: var(--gold);
+}
+.divider::before, .divider::after {
+  content: ""; height: 1px; width: min(30vw, 240px);
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+.divider::after { transform: scaleX(-1); }
+
+.eyebrow {
+  font-family: var(--serif-text);
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--brick);
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 40;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.85rem var(--gut);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+}
+/* Blur lives on a pseudo-layer, not on .nav itself: a backdrop-filter on the
+   nav would become the containing block for the fixed mobile menu and shrink
+   it to the bar height. Keeping it here lets the menu size to the viewport. */
+.nav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.nav.scrolled { border-bottom-color: var(--paper-edge); }
+.nav-logo {
+  display: flex; flex-direction: column; line-height: 0.92;
+  font-family: var(--serif-display);
+}
+.nav-logo .n1 {
+  font-size: 1.02rem; font-weight: 800; letter-spacing: 0.05em;
+  color: var(--brick); text-transform: uppercase;
+}
+.nav-logo .n2 {
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.42em;
+  color: var(--olive); text-transform: uppercase; padding-left: 0.15em;
+}
+.nav-links { display: flex; gap: clamp(1rem, 3vw, 2.4rem); }
+.nav-links a {
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--ink-soft); position: relative; padding-block: 0.3rem;
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 0;
+  background: var(--brick); transition: width 0.4s var(--ease);
+}
+.nav-links a:hover { color: var(--brick); }
+.nav-links a:hover::after { width: 100%; }
+.nav-toggle { display: none; }
+
+@media (max-width: 720px) {
+  .nav-links {
+    position: fixed; inset: 0; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1.6rem;
+    background: var(--paper); transform: translateY(-100%);
+    transition: transform 0.5s var(--ease); z-index: 39;
+  }
+  .nav-links a { font-size: 1.1rem; }
+  body.menu-open .nav-links { transform: none; }
+  .nav-toggle {
+    display: flex; flex-direction: column; gap: 5px; z-index: 41;
+    background: none; border: 0; cursor: pointer; padding: 6px;
+  }
+  .nav-toggle span {
+    width: 26px; height: 2px; background: var(--ink);
+    transition: transform 0.4s var(--ease), opacity 0.3s;
+  }
+  body.menu-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 100svh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 7rem var(--gut) 3rem; position: relative;
+}
+.hero-mark {
+  font-family: var(--serif-display);
+  color: var(--ink);
+}
+.hero-the {
+  text-transform: uppercase; letter-spacing: 0.5em;
+  font-size: clamp(0.7rem, 1.6vw, 0.95rem); font-weight: 600;
+  color: var(--ink-soft); padding-left: 0.5em;
+  margin-bottom: 0.4rem;
+}
+.hero-red {
+  font-weight: 900; color: var(--brick);
+  font-size: clamp(3.4rem, 15vw, 11rem); line-height: 0.86;
+  letter-spacing: 0.01em; text-transform: uppercase;
+  margin: 0;
+}
+.hero-foc {
+  font-weight: 600; color: var(--olive);
+  font-size: clamp(1.1rem, 5.2vw, 3.3rem); line-height: 1;
+  letter-spacing: clamp(0.14em, 1.4vw, 0.4em);
+  text-transform: uppercase; margin: 0.35rem 0 0;
+  white-space: nowrap;
+}
+.hero-tag {
+  margin: 1.6rem 0 0; font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.4rem); color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+.hero-tag .dot { color: var(--brick); font-style: normal; padding: 0 0.35em; }
+.hero-cue {
+  position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.66rem;
+  color: var(--ink-faint);
+}
+.hero-cue .arrow {
+  width: 1px; height: 34px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  animation: cue 2.4s var(--ease) infinite;
+}
+@keyframes cue {
+  0%, 100% { transform: scaleY(0.5); opacity: 0.3; transform-origin: top; }
+  50% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-cue .arrow { animation: none; } }
+
+/* ---------- Ethos ---------- */
+.ethos { padding: clamp(5rem, 12vw, 9rem) 0; text-align: center; }
+.ethos-lead {
+  font-family: var(--serif-display); font-weight: 400;
+  font-size: clamp(1.7rem, 4.4vw, 3.2rem); line-height: 1.22;
+  letter-spacing: -0.01em; max-width: 20ch; margin: 1.6rem auto 0;
+  color: var(--ink);
+}
+.ethos-lead em { color: var(--brick); font-style: italic; }
+.ethos-time {
+  margin: 2.6rem auto 0; max-width: 34ch;
+  font-style: italic; color: var(--ink-soft);
+  font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.7;
+}
+
+/* ---------- Timeline / Story ---------- */
+.story { padding: clamp(3rem, 7vw, 5rem) 0 clamp(5rem, 12vw, 8rem); }
+.story-head { text-align: center; margin-bottom: clamp(3rem, 7vw, 5rem); }
+.story-title {
+  font-family: var(--serif-display); font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1.05;
+  color: var(--olive); margin: 1rem 0 0;
+}
+
+.timeline { position: relative; max-width: 940px; margin: 0 auto; }
+/* central spine */
+.timeline::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: calc(var(--gut) + 140px);
+  width: 2px; background: var(--paper-edge);
+}
+.timeline-fill {
+  position: absolute; top: 0; left: calc(var(--gut) + 140px); width: 2px; height: 0;
+  background: linear-gradient(180deg, var(--olive), var(--amber) 30%, var(--brick-d) 55%, var(--brick) 80%, var(--olive));
+  transition: height 0.2s linear; z-index: 1;
+}
+
+.era { position: relative; display: grid;
+  grid-template-columns: 116px 48px 1fr; align-items: start;
+  padding-block: clamp(1.4rem, 3vw, 2.4rem); }
+.era-tag { justify-self: end; text-align: right; }
+.tag-pill {
+  display: inline-block; font-family: var(--serif-display); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  font-size: 0.82rem; color: var(--paper);
+  padding: 0.42em 0.9em; border-radius: 2px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.12);
+  white-space: nowrap;
+}
+.tag-pill.olive { background: var(--olive); }
+.tag-pill.amber { background: var(--amber); color: #3a2a10; }
+.tag-pill.brick-d { background: var(--brick-d); }
+.tag-pill.brick { background: var(--brick); }
+.era-sub {
+  display: block; margin-top: 0.6rem; font-style: italic;
+  font-size: 0.98rem; color: var(--ink-soft); line-height: 1.4;
+}
+
+.era-node { position: relative; height: 100%; }
+.era-node .dot {
+  position: absolute; top: 0.5rem; left: 50%; transform: translateX(-50%);
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--paper); border: 2px solid var(--ink-soft);
+  z-index: 2; transition: border-color 0.4s var(--ease), background 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.era.lit .dot { transform: translateX(-50%) scale(1.15); }
+.era[data-c="olive"].lit .dot   { border-color: var(--olive);   background: var(--olive); }
+.era[data-c="amber"].lit .dot   { border-color: var(--amber);   background: var(--amber); }
+.era[data-c="brick-d"].lit .dot { border-color: var(--brick-d); background: var(--brick-d); }
+.era[data-c="brick"].lit .dot   { border-color: var(--brick);   background: var(--brick); }
+
+.era-body { padding-top: 0.15rem; }
+.era-body p { margin: 0; color: var(--ink); max-width: 46ch; }
+.era-body .accent { color: var(--brick); font-style: italic; }
+
+@media (max-width: 680px) {
+  .timeline::before, .timeline-fill { left: calc(var(--gut) + 9px); }
+  .era { grid-template-columns: 20px 1fr; gap: 0 1rem; row-gap: 0.7rem; }
+  .era-tag { grid-column: 2; justify-self: start; text-align: left; order: 1; }
+  .era-node { grid-column: 1; grid-row: 1 / span 2; }
+  .era-node .dot { left: 9px; transform: translateX(-50%); }
+  .era.lit .dot { transform: translateX(-50%) scale(1.15); }
+  .era-body { grid-column: 2; order: 2; }
+  .era-sub { margin-top: 0.3rem; }
+}
+
+/* ---------- Emblem / mill band ---------- */
+.emblem-band {
+  background: var(--olive);
+  color: var(--paper);
+  padding: clamp(4.5rem, 11vw, 8rem) 0;
+  text-align: center; position: relative; overflow: hidden;
+}
+.emblem-band::before, .emblem-band::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 3px;
+  background: repeating-linear-gradient(90deg, var(--amber) 0 10px, transparent 10px 20px);
+  opacity: 0.5;
+}
+.emblem-band::before { top: 0; }
+.emblem-band::after { bottom: 0; }
+.emblem { width: clamp(180px, 34vw, 260px); height: auto; margin: 0 auto; color: var(--paper); }
+.emblem .seal-ring { stroke: var(--amber); }
+.emblem .seal-text { fill: var(--paper); font-family: var(--serif-display);
+  font-weight: 600; letter-spacing: 3px; }
+.emblem-motto {
+  font-family: var(--serif-display); font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  font-size: clamp(1.2rem, 3.4vw, 2.3rem); line-height: 1.3;
+  margin: 2.2rem auto 0; max-width: 22ch;
+}
+.emblem-motto .hl { color: var(--amber); }
+.emblem-sub {
+  margin: 1.2rem auto 0; max-width: 40ch; font-style: italic;
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+/* ---------- The Red Hook Way ---------- */
+.way { padding: clamp(5rem, 12vw, 9rem) 0; text-align: center; }
+.way-lead {
+  font-family: var(--serif-display); font-weight: 400;
+  font-size: clamp(1.5rem, 4vw, 2.6rem); line-height: 1.28;
+  max-width: 24ch; margin: 1.4rem auto 0; color: var(--ink);
+}
+.way-lead strong { color: var(--brick); font-weight: 700; }
+.values {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  margin: clamp(3rem, 7vw, 5rem) auto 0; max-width: 900px; text-align: left;
+}
+.value {
+  border-top: 2px solid var(--brick);
+  padding: 1.4rem 0.2rem 0; background: transparent;
+}
+.value .vnum {
+  font-family: var(--serif-display); font-style: italic;
+  color: var(--amber); font-size: 1rem; letter-spacing: 0.05em;
+}
+.value h3 {
+  font-family: var(--serif-display); font-weight: 700;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem); color: var(--olive);
+  margin: 0.4rem 0 0.6rem; line-height: 1.15;
+}
+.value p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; }
+@media (max-width: 680px) {
+  .values { grid-template-columns: 1fr; max-width: 30ch; }
+}
+
+/* ---------- Footer / Visit ---------- */
+.visit {
+  background: var(--paper-deep);
+  border-top: 1px solid var(--paper-edge);
+  padding: clamp(4rem, 10vw, 7rem) 0 2.5rem;
+  text-align: center;
+}
+.visit-mark {
+  font-family: var(--serif-display); font-weight: 900; color: var(--brick);
+  text-transform: uppercase; letter-spacing: 0.02em;
+  font-size: clamp(1.8rem, 6vw, 3.4rem); line-height: 0.9;
+}
+.visit-mark small {
+  display: block; font-size: 0.3em; font-weight: 600; letter-spacing: 0.4em;
+  color: var(--olive); margin-top: 0.5rem;
+}
+.visit-line {
+  margin: 1.6rem auto 0; max-width: 40ch; color: var(--ink-soft);
+  font-style: italic; font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.visit-meta {
+  margin-top: 2.4rem; display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.6rem 2rem; text-transform: uppercase; letter-spacing: 0.22em;
+  font-size: 0.72rem; color: var(--ink-faint);
+}
+.visit-meta a { color: var(--ink-soft); transition: color 0.3s; }
+.visit-meta a:hover { color: var(--brick); }
+.visit-cred {
+  margin-top: 3rem; font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-faint);
+}

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Red Hook Focacceria, Brooklyn</title>
+  <meta name="description" content="The Red Hook Focacceria. Slow-fermented bread made with 100% Italian semolina flour. Handcrafted and honest, the way bread was meant to be. Red Hook, Brooklyn.">
+  <meta name="theme-color" content="#f4efe3">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Red Hook Focacceria">
+  <meta property="og:description" content="Our story. Our bread. Our Brooklyn. Slow-fermented, clean label, imported Italian flour.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Red Hook Focacceria">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="redhook.css">
+
+  <noscript><style>
+    /* JS disabled: never leave content hidden. Mirror the reveal end-state. */
+    [data-reveal] { opacity: 1 !important; transform: none !important; }
+    .timeline-fill { height: 100% !important; }
+  </style></noscript>
+</head>
+<body>
+
+  <!-- ---------- Nav ---------- -->
+  <header class="nav" id="nav">
+    <a class="nav-logo" href="#top" aria-label="The Red Hook Focacceria, home">
+      <span class="n1">Red Hook</span>
+      <span class="n2">Focacceria</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#story">Story</a>
+      <a href="#way">Our Way</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ---------- Hero ---------- -->
+  <section class="hero" id="top">
+    <div class="hero-mark">
+      <div class="hero-the" data-reveal>The</div>
+      <h1 class="hero-red" data-reveal style="--d:1">Red Hook</h1>
+      <div class="hero-foc" data-reveal style="--d:2">Focacceria</div>
+    </div>
+    <hr class="rule-gold" data-reveal style="--d:3; width:min(420px,70%); margin-top:1.6rem">
+    <p class="hero-tag" data-reveal style="--d:4">
+      Our Story<span class="dot">.</span>Our Bread<span class="dot">.</span>Our Brooklyn<span class="dot">.</span>
+    </p>
+    <a class="hero-cue" href="#story" aria-label="Read our story">
+      <span>Back to 1870</span>
+      <span class="arrow"></span>
+    </a>
+  </section>
+
+  <!-- ---------- Ethos ---------- -->
+  <section class="ethos wrap">
+    <div class="divider" data-reveal>
+      <svg class="wheat" viewBox="0 0 24 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 46 V14"/>
+        <path d="M12 14 C 9 9, 8 6, 12 3 C 16 6, 15 9, 12 14 Z" fill="currentColor" stroke="none"/>
+        <path d="M12 20 C 7 18, 5 15, 6 11"/><path d="M12 20 C 17 18, 19 15, 18 11"/>
+        <path d="M12 28 C 7 26, 5 23, 6 19"/><path d="M12 28 C 17 26, 19 23, 18 19"/>
+        <path d="M12 36 C 7 34, 5 31, 6 27"/><path d="M12 36 C 17 34, 19 31, 18 27"/>
+      </svg>
+    </div>
+    <p class="eyebrow" data-reveal style="--d:1">A return to real bread</p>
+    <p class="ethos-lead" data-reveal style="--d:2">
+      Bread was once simple, honest, and <em>alive</em>. We are bringing it back to the table.
+    </p>
+    <p class="ethos-time" data-reveal style="--d:3">
+      Handmade. It is all about time. Time creates flavor. Time creates tradition. Time connects us.
+    </p>
+  </section>
+
+  <!-- ---------- Timeline / Story ---------- -->
+  <section class="story" id="story">
+    <div class="story-head wrap">
+      <p class="eyebrow" data-reveal>Our Story</p>
+      <h2 class="story-title" data-reveal style="--d:1">The way it was supposed to be</h2>
+    </div>
+
+    <div class="timeline wrap" id="timeline">
+      <div class="timeline-fill" id="timelineFill"></div>
+
+      <article class="era" data-c="olive" data-reveal>
+        <div class="era-tag">
+          <span class="tag-pill olive">Before 1870</span>
+          <span class="era-sub">A return to the roots of real bread.</span>
+        </div>
+        <div class="era-node"><span class="dot"></span></div>
+        <div class="era-body">
+          <p>Bread was simple, honest, and alive. Made with only flour, water, salt, and time. Slow fermentation, natural ingredients, bread you could feel good about.</p>
+        </div>
+      </article>
+
+      <article class="era" data-c="amber" data-reveal>
+        <div class="era-tag">
+          <span class="tag-pill amber">1870</span>
+          <span class="era-sub">Convenience grew, quality declined.</span>
+        </div>
+        <div class="era-node"><span class="dot"></span></div>
+        <div class="era-body">
+          <p>The industrial revolution changed everything. Milling became faster, bread became cheaper, and with that progress came the loss of nutrients, flavor, and integrity.</p>
+        </div>
+      </article>
+
+      <article class="era" data-c="brick-d" data-reveal>
+        <div class="era-tag">
+          <span class="tag-pill brick-d">1940</span>
+          <span class="era-sub">We lost something essential.</span>
+        </div>
+        <div class="era-node"><span class="dot"></span></div>
+        <div class="era-body">
+          <p>Processed foods took over. Additives, chemicals, and shortcuts became the norm. Bread became soft, uniform, and forgettable.</p>
+        </div>
+      </article>
+
+      <article class="era" data-c="brick" data-reveal>
+        <div class="era-tag">
+          <span class="tag-pill brick">Today</span>
+          <span class="era-sub">The way bread was meant to be.</span>
+        </div>
+        <div class="era-node"><span class="dot"></span></div>
+        <div class="era-body">
+          <p>We are bringing bread back to the table, the way it used to be. <span class="accent">Clean label. High hydration. Long fermentation.</span> Few ingredients, maximum digestibility.</p>
+        </div>
+      </article>
+
+      <article class="era" data-c="olive" data-reveal>
+        <div class="era-tag">
+          <span class="tag-pill olive">Our Way</span>
+          <span class="era-sub">This is The Red Hook Way.</span>
+        </div>
+        <div class="era-node"><span class="dot"></span></div>
+        <div class="era-body">
+          <p>At The Red Hook Focacceria we use a custom blend of 100% Italian semolina flour. Slow-fermented, handcrafted, honest, built on time, tradition, and care.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ---------- Emblem / mill band ---------- -->
+  <section class="emblem-band">
+    <div class="wrap">
+      <svg class="emblem" viewBox="0 0 240 240" data-reveal role="img" aria-label="The Red Hook Focacceria seal, Red Hook Brooklyn">
+        <circle class="seal-ring" cx="120" cy="120" r="112" fill="none" stroke-width="2"/>
+        <circle class="seal-ring" cx="120" cy="120" r="101" fill="none" stroke-width="1"/>
+        <defs>
+          <path id="topArc" d="M 34 120 A 86 86 0 0 1 206 120"/>
+          <path id="botArc" d="M 42 120 A 78 78 0 0 0 198 120"/>
+        </defs>
+        <text class="seal-text" font-size="13" text-anchor="middle">
+          <textPath href="#topArc" startOffset="50%">THE RED HOOK FOCACCERIA</textPath>
+        </text>
+        <text class="seal-text" font-size="11" text-anchor="middle">
+          <textPath href="#botArc" startOffset="50%">RED HOOK &#183; BROOKLYN</textPath>
+        </text>
+        <!-- side stars -->
+        <g fill="#d68a2c">
+          <path d="M31 120 l4 -4 4 4 -4 4 z"/>
+          <path d="M201 120 l4 -4 4 4 -4 4 z"/>
+        </g>
+        <!-- water wheel + wheat -->
+        <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="120" cy="112" r="30"/>
+          <circle cx="120" cy="112" r="6" fill="currentColor"/>
+          <g stroke-width="1.6">
+            <line x1="120" y1="82" x2="120" y2="142"/>
+            <line x1="90" y1="112" x2="150" y2="112"/>
+            <line x1="99" y1="91" x2="141" y2="133"/>
+            <line x1="141" y1="91" x2="99" y2="133"/>
+          </g>
+          <g stroke="#d68a2c" stroke-width="3">
+            <line x1="120" y1="79" x2="120" y2="85"/>
+            <line x1="153" y1="112" x2="147" y2="112"/>
+            <line x1="120" y1="145" x2="120" y2="139"/>
+            <line x1="87" y1="112" x2="93" y2="112"/>
+            <line x1="143.5" y1="88.5" x2="139" y2="93"/>
+            <line x1="96.5" y1="135.5" x2="101" y2="131"/>
+            <line x1="143.5" y1="135.5" x2="139" y2="131"/>
+            <line x1="96.5" y1="88.5" x2="101" y2="93"/>
+          </g>
+          <g stroke="#d68a2c" stroke-width="1.6">
+            <path d="M104 168 C 100 160, 100 154, 108 150"/>
+            <path d="M136 168 C 140 160, 140 154, 132 150"/>
+            <path d="M120 172 V 150"/>
+          </g>
+        </g>
+      </svg>
+
+      <p class="emblem-motto" data-reveal style="--d:1">
+        Back to 1870<span class="hl">.</span> Forward with purpose<span class="hl">.</span>
+      </p>
+      <p class="emblem-sub" data-reveal style="--d:2">
+        Long fermentation &#183; Imported Italian flour &#183; Clean label
+      </p>
+    </div>
+  </section>
+
+  <!-- ---------- The Red Hook Way ---------- -->
+  <section class="way wrap" id="way">
+    <p class="eyebrow" data-reveal>The Red Hook Way</p>
+    <p class="way-lead" data-reveal style="--d:1">
+      A custom blend of <strong>100% Italian semolina flour</strong>. Slow-fermented, handcrafted, honest.
+    </p>
+
+    <div class="values">
+      <div class="value" data-reveal style="--d:1">
+        <span class="vnum">i.</span>
+        <h3>Long Fermentation</h3>
+        <p>Dough rested for the time it takes to build real flavor and a crumb that is easy to digest.</p>
+      </div>
+      <div class="value" data-reveal style="--d:2">
+        <span class="vnum">ii.</span>
+        <h3>Imported Italian Flour</h3>
+        <p>100% Italian semolina, milled for the golden color, aroma, and strength that define our bread.</p>
+      </div>
+      <div class="value" data-reveal style="--d:3">
+        <span class="vnum">iii.</span>
+        <h3>Clean Label</h3>
+        <p>Flour, water, salt, and time. Few ingredients, no shortcuts, nothing you cannot pronounce.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- Footer / Visit ---------- -->
+  <footer class="visit" id="visit">
+    <div class="wrap">
+      <div class="visit-mark" data-reveal>
+        Red Hook
+        <small>Focacceria &#183; Brooklyn NY</small>
+      </div>
+      <p class="visit-line" data-reveal style="--d:1">
+        The way it was supposed to be. Bread brought back to the table, the way it used to be.
+      </p>
+      <div class="visit-meta" data-reveal style="--d:2">
+        <span>Red Hook, Brooklyn</span>
+        <a href="https://instagram.com/redhookfocacceria" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:hello@redhookfocacceria.com">hello@redhookfocacceria.com</a>
+      </div>
+      <p class="visit-cred">Baked with time, tradition, and care</p>
+    </div>
+  </footer>
+
+  <script src="redhook.js"></script>
+  <!-- Failsafe: if the reveal observer never runs, show everything. -->
+  <script>
+    (function () {
+      setTimeout(function () {
+        if (!document.body.classList.contains('loaded')) {
+          document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('in'); });
+          var f = document.getElementById('timelineFill'); if (f) f.style.height = '100%';
+        }
+      }, 1200);
+    })();
+  </script>
+</body>
+</html>
