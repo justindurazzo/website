@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Red Hook Focacceria, poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe3; --ink:#2a2620; --ink-soft:#554f43;
+    --brick:#9e2b25; --brick-d:#7c1d1a; --olive:#3f4632; --amber:#d68a2c; --gold:#b6924f;
+    --sd:"Playfair Display",Georgia,serif; --st:"EB Garamond",Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#514f45;}
+  .poster{
+    position:relative; width:2174px; height:1200px; overflow:hidden;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 22% 26%, rgba(120,90,40,.05) 0, transparent 42%),
+      radial-gradient(circle at 84% 76%, rgba(120,90,40,.045) 0, transparent 46%);
+    color:var(--ink); font-family:var(--st);
+  }
+  .poster::after{content:"";position:absolute;inset:28px;border:1px solid rgba(120,90,40,.30);pointer-events:none;}
+
+  /* ---------- Header ---------- */
+  .head{left:96px;right:96px;top:66px;text-align:center;position:absolute;}
+  .the{font-family:var(--st);font-weight:600;letter-spacing:.55em;font-size:24px;color:var(--ink-soft);padding-left:.55em;}
+  .red{font-family:var(--sd);font-weight:900;color:var(--brick);font-size:142px;line-height:.82;letter-spacing:.01em;text-transform:uppercase;margin-top:4px;}
+  .focrow{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:10px;}
+  .focrow .ln{height:2px;width:140px;background:var(--brick);opacity:.85;}
+  .foc{font-family:var(--sd);font-weight:600;color:var(--olive);font-size:48px;letter-spacing:.32em;text-transform:uppercase;}
+  .tag{font-family:var(--sd);font-weight:700;letter-spacing:.16em;font-size:26px;text-transform:uppercase;color:var(--ink);margin-top:16px;}
+  .tag .d{color:var(--brick);}
+  .wheatrow{display:flex;justify-content:center;margin-top:12px;color:var(--brick);}
+
+  /* ---------- Timeline ---------- */
+  .timeline{left:130px;top:410px;width:240px;position:absolute;}
+  .era{height:106px;}
+  .pill{display:inline-flex;align-items:center;justify-content:center;min-width:212px;height:46px;padding:0 22px;
+        font-family:var(--sd);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:24px;color:var(--paper);
+        border-radius:2px;box-shadow:3px 3px 0 rgba(0,0,0,.13);}
+  .pill.olive{background:var(--olive);} .pill.amber{background:var(--amber);color:#3a2a10;}
+  .pill.brickd{background:var(--brick-d);} .pill.brick{background:var(--brick);}
+  .sub{display:block;margin-top:8px;font-style:italic;font-size:21px;line-height:1.28;color:var(--ink-soft);}
+  .spine{left:374px;top:433px;width:2px;height:424px;background:var(--gold);opacity:.55;position:absolute;}
+  .cnx{position:absolute;left:344px;height:2px;width:30px;background:var(--gold);opacity:.55;}
+  .node{position:absolute;left:366px;width:18px;height:18px;border-radius:50%;border:3px solid var(--paper);box-shadow:0 0 0 1px rgba(0,0,0,.18);}
+  .node.olive{background:var(--olive);} .node.amber{background:var(--amber);}
+  .node.brickd{background:var(--brick-d);} .node.brick{background:var(--brick);}
+
+  /* ---------- Story ---------- */
+  .story{left:470px;top:410px;width:500px;position:absolute;}
+  .chap{height:106px;}
+  .chap p{font-size:19px;line-height:1.3;color:var(--ink);}
+  .chap p .ac{color:var(--brick);font-style:italic;}
+
+  /* ---------- Creed (lower-left) ---------- */
+  .creed{position:absolute;left:130px;top:1002px;font-style:italic;font-size:21px;line-height:1.42;color:var(--ink-soft);}
+  .creed b{font-style:normal;font-weight:600;color:var(--ink);}
+
+  /* ---------- Mill ---------- */
+  .mill{right:150px;top:350px;width:770px;height:600px;color:var(--ink);position:absolute;}
+
+  /* ---------- Values + motto ---------- */
+  .values{position:absolute;left:1299px;top:956px;transform:translateX(-50%);
+          display:flex;align-items:center;gap:22px;font-family:var(--sd);font-weight:600;
+          text-transform:uppercase;letter-spacing:.13em;font-size:25px;color:var(--ink);white-space:nowrap;}
+  .values .sep{color:var(--brick);font-size:15px;}
+  .footrule{position:absolute;left:520px;right:96px;top:1012px;height:2px;background:linear-gradient(90deg,transparent,var(--gold) 28%,var(--gold) 72%,transparent);}
+  .footrule::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:13px;border-radius:50%;background:var(--brick);transform:translate(-50%,-50%);}
+  .motto{position:absolute;left:520px;right:96px;top:1050px;text-align:center;
+         font-family:var(--sd);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:37px;line-height:1.18;color:var(--ink);}
+  .motto .r{color:var(--brick);}
+</style>
+</head>
+<body>
+<div class="poster" id="poster">
+
+  <!-- Header -->
+  <div class="head">
+    <div class="the">The</div>
+    <div class="red">Red Hook</div>
+    <div class="focrow"><span class="ln"></span><span class="foc">Focacceria</span><span class="ln"></span></div>
+    <div class="tag">Our Story<span class="d">.</span> Our Bread<span class="d">.</span> Our Brooklyn<span class="d">.</span></div>
+    <div class="wheatrow">
+      <svg width="240" height="30" viewBox="0 0 240 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <line x1="12" y1="16" x2="98" y2="16"/><line x1="142" y1="16" x2="228" y2="16"/>
+        <path d="M120 7 V27"/>
+        <path d="M120 11 C114 12 110 14 108 17"/><path d="M120 11 C126 12 130 14 132 17"/>
+        <path d="M120 17 C114 18 110 20 108 23"/><path d="M120 17 C126 18 130 20 132 23"/>
+        <path d="M120 7 C117 4 117 3 120 1 C123 3 123 4 120 7 Z" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="spine"></div>
+  <div class="timeline">
+    <div class="era"><span class="pill olive">Before 1870</span><span class="sub">A return to the roots<br>of real bread.</span></div>
+    <div class="era"><span class="pill amber">1870</span><span class="sub">Convenience grew,<br>quality declined.</span></div>
+    <div class="era"><span class="pill brickd">1940</span><span class="sub">We lost something<br>essential.</span></div>
+    <div class="era"><span class="pill brick">Today</span><span class="sub">The way bread<br>was meant to be.</span></div>
+    <div class="era"><span class="pill olive">Our Way</span><span class="sub">This is The<br>Red Hook Way.</span></div>
+  </div>
+  <span class="cnx" style="top:432px"></span><span class="node olive"  style="top:424px"></span>
+  <span class="cnx" style="top:538px"></span><span class="node amber"  style="top:530px"></span>
+  <span class="cnx" style="top:644px"></span><span class="node brickd" style="top:636px"></span>
+  <span class="cnx" style="top:750px"></span><span class="node brick"  style="top:742px"></span>
+  <span class="cnx" style="top:856px"></span><span class="node olive"  style="top:848px"></span>
+
+  <!-- Story -->
+  <div class="story">
+    <div class="chap"><p>Bread was simple, honest, and alive.<br>Made with only flour, water, salt, and time.<br>Slow fermentation. Natural ingredients.<br>Bread you could feel good about.</p></div>
+    <div class="chap"><p>The industrial revolution changed everything.<br>Milling became faster. Bread became cheaper.<br>With progress came the loss of nutrients,<br>flavor, and integrity.</p></div>
+    <div class="chap"><p>Processed foods took over. Additives,<br>chemicals, and shortcuts became the norm.<br>Bread became soft, uniform,<br>and forgettable.</p></div>
+    <div class="chap"><p>We are bringing bread back to the table,<br>the way it used to be. <span class="ac">Clean label.<br>High hydration. Long fermentation.</span><br>Few ingredients. Maximum digestibility.</p></div>
+    <div class="chap"><p>At The Red Hook Focacceria we use a custom<br>blend of 100% Italian semolina flour.<br>Slow-fermented. Handcrafted. Honest.<br>Built on time, tradition, and care.</p></div>
+  </div>
+
+  <!-- Creed -->
+  <div class="creed"><b>Handmade.</b><br>It is all about time.<br>Time creates flavor.<br>Time creates tradition.<br>Time connects us.</div>
+
+  <!-- Mill engraving -->
+  <svg class="mill" viewBox="0 0 770 600" fill="none" aria-label="Watermill engraving">
+    <defs>
+      <pattern id="brick" width="34" height="20" patternUnits="userSpaceOnUse">
+        <path d="M0 0 H34 M0 10 H34 M0 0 V10 M34 0 V10 M17 10 V20" stroke="#2a2620" stroke-width="1" opacity=".8"/>
+      </pattern>
+      <pattern id="roof" width="16" height="14" patternUnits="userSpaceOnUse">
+        <path d="M0 12 H16 M0 4 H16" stroke="#2a2620" stroke-width="1"/>
+        <path d="M8 4 v8 M0 4 v8 M16 4 v8" stroke="#2a2620" stroke-width=".7" opacity=".5"/>
+      </pattern>
+      <pattern id="stip" width="11" height="11" patternUnits="userSpaceOnUse">
+        <circle cx="2.5" cy="2.5" r="1.15" fill="#2a2620"/><circle cx="8" cy="7" r="1.15" fill="#2a2620"/>
+      </pattern>
+      <radialGradient id="vig" cx="50%" cy="46%" r="60%">
+        <stop offset="72%" stop-color="#f4efe3" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#f4efe3" stop-opacity="1"/>
+      </radialGradient>
+    </defs>
+    <g stroke="#2a2620">
+      <g stroke-width="1.4">
+        <path d="M92 262 q-24 -20 -8 -46 q4 -32 42 -32 q10 -28 46 -24 q20 -26 48 -10 q28 -8 36 20 q28 6 22 36 q18 20 -4 40 z" fill="url(#stip)"/>
+        <path d="M600 250 q26 -18 12 -46 q-4 -30 -42 -30 q-8 -30 -46 -22 q-22 -22 -48 -6 q-24 -12 -34 16 q-28 8 -18 36 q-20 18 6 42 z" fill="url(#stip)"/>
+      </g>
+      <rect x="258" y="206" width="236" height="204" fill="url(#brick)" stroke-width="2"/>
+      <path d="M238 210 L376 122 L514 210 Z" fill="url(#roof)" stroke-width="2"/>
+      <line x1="238" y1="210" x2="514" y2="210" stroke-width="2"/>
+      <rect x="418" y="156" width="28" height="50" fill="url(#brick)" stroke-width="1.6"/>
+      <rect x="411" y="150" width="42" height="10" fill="#efe7d6" stroke-width="1.6"/>
+      <path d="M310 410 V314 a28 28 0 0 1 56 0 V410" fill="#39342b" stroke-width="1.8"/>
+      <line x1="338" y1="292" x2="338" y2="410" stroke="#efe7d6" stroke-width="1"/>
+      <g stroke-width="1.6" fill="#efe7d6">
+        <rect x="280" y="250" width="42" height="50"/><rect x="430" y="250" width="42" height="50"/>
+      </g>
+      <g stroke-width="1">
+        <line x1="301" y1="250" x2="301" y2="300"/><line x1="280" y1="275" x2="322" y2="275"/>
+        <line x1="451" y1="250" x2="451" y2="300"/><line x1="430" y1="275" x2="472" y2="275"/>
+      </g>
+      <circle cx="376" cy="174" r="17" fill="#efe7d6" stroke-width="1.6"/>
+      <path d="M359 174 H393 M376 157 V191" stroke-width="1"/>
+      <g stroke-width="2">
+        <circle cx="556" cy="372" r="90" fill="#efe7d6"/>
+        <circle cx="556" cy="372" r="75"/>
+        <circle cx="556" cy="372" r="15" fill="#2a2620"/>
+      </g>
+      <g stroke-width="1.5">
+        <line x1="556" y1="282" x2="556" y2="462"/><line x1="466" y1="372" x2="646" y2="372"/>
+        <line x1="492" y1="308" x2="620" y2="436"/><line x1="620" y1="308" x2="492" y2="436"/>
+        <line x1="524" y1="290" x2="588" y2="454"/><line x1="588" y1="290" x2="524" y2="454"/>
+        <line x1="474" y1="340" x2="638" y2="404"/><line x1="638" y1="340" x2="474" y2="404"/>
+      </g>
+      <g stroke-width="2" fill="#efe7d6">
+        <rect x="548" y="280" width="16" height="20"/><rect x="548" y="444" width="16" height="20"/>
+        <rect x="462" y="364" width="20" height="16"/><rect x="630" y="364" width="20" height="16"/>
+        <rect x="500" y="312" width="18" height="18" transform="rotate(45 509 321)"/>
+        <rect x="594" y="414" width="18" height="18" transform="rotate(45 603 423)"/>
+        <rect x="594" y="312" width="18" height="18" transform="rotate(-45 603 321)"/>
+        <rect x="500" y="414" width="18" height="18" transform="rotate(-45 509 423)"/>
+      </g>
+      <g stroke-width="1.6">
+        <path d="M120 312 H310 M120 336 H310"/>
+        <path d="M150 312 V342 M195 312 V342 M240 312 V342 M285 312 V342"/>
+      </g>
+      <g stroke-width="1.4" stroke="#7d8590">
+        <path d="M556 462 v78 M574 468 v70 M538 468 v70 M592 474 v58 M520 474 v58"/>
+      </g>
+      <g stroke-width="1.3" stroke="#7d8590">
+        <path d="M150 512 q42 -12 84 0 t84 0 t84 0 t84 0 t84 0 t84 0"/>
+        <path d="M126 540 q46 -12 92 0 t92 0 t92 0 t92 0 t92 0"/>
+        <path d="M172 566 q42 -12 84 0 t84 0 t84 0 t84 0 t84 0"/>
+      </g>
+      <g stroke-width="1.4">
+        <path d="M120 486 q6 -36 42 -36 q10 -26 42 -18 q32 -6 36 24 q22 8 8 30 z" fill="url(#stip)"/>
+        <path d="M600 492 q6 -32 40 -32 q8 -24 40 -16 q30 -4 32 22 q20 8 6 26 z" fill="url(#stip)"/>
+      </g>
+    </g>
+    <rect x="0" y="0" width="770" height="600" fill="url(#vig)"/>
+  </svg>
+
+  <!-- Values + rule + motto -->
+  <div class="values">
+    <span>Long Fermentation</span><span class="sep">&#9670;</span>
+    <span>Imported Italian Flour</span><span class="sep">&#9670;</span>
+    <span>Clean Label</span>
+  </div>
+  <div class="footrule"></div>
+  <div class="motto">The way it was supposed to be.<span class="r"> Back to 1870. Forward with purpose.</span></div>
+
+</div>
+</body>
+</html>
