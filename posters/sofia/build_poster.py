@@ -13,7 +13,7 @@ OUT   = "/home/user/website/posters/sofia/sofia-durazzo-poster.pdf"
 # ---------- palette ----------
 NAVY   = HexColor("#1B2A57")   # deep royal navy field
 NAVY_D = HexColor("#141F42")   # deeper navy, vignette
-RED    = HexColor("#C43B30")   # brick red pop
+RED    = HexColor("#D23A66")   # raspberry magenta-pink pop
 CREAM  = HexColor("#ECE3CD")   # warm oatmeal (type on navy)
 CREAM2 = HexColor("#D8CDB0")
 BORDER = HexColor("#F0EAD9")   # warm off-white mat
