@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# Electric Vernacular (restrained), "THIS IS SOFIA." birth poster
-# Faithful to the Ella brand language: thin condensed type, one clean
-# parallelogram gesture, deep royal navy + soft mauve-rose, generous space.
+# "SOFIA DURAZZO" birth poster, playful-editorial (Vicki Tan book-cover language):
+# warm blush ground, cobalt-royal blue, sunny yellow, black ink, arched bold
+# type, a rising-sun illustration, a serif line, tracked caps, yellow spine.
 import math
 from reportlab.pdfgen import canvas
 from reportlab.lib.colors import HexColor
@@ -12,130 +12,123 @@ FONTS = "/root/.claude/skills/canvas-design/canvas-fonts/"
 OUT   = "/home/user/website/posters/sofia/sofia-durazzo-poster.pdf"
 
 # ---------- palette ----------
-BLUE   = HexColor("#16295F")   # deep royal navy field
-MAUVE  = HexColor("#DBACB4")   # soft rose-mauve (the Ella accent)
-MAUVE_D= HexColor("#CF9DA6")   # slightly deeper mauve
-ROSE_T = HexColor("#E7C6CC")   # pale rose for micro labels
-CREAM  = HexColor("#F2EEE4")   # warm gallery white
-CREAM2 = HexColor("#E4DECF")
+BLUSH  = HexColor("#F3E5DF")   # warm blush ground
+BLUE   = HexColor("#2B43D6")   # cobalt royal blue
+BLUE_D = HexColor("#20308F")   # deeper blue (shadows)
+YELLOW = HexColor("#F4C21B")   # sunny yellow pop
+INK    = HexColor("#1C1B1A")   # soft black
 
 # ---------- page ----------
-W, H = 1296.0, 1728.0          # 18 x 24 in
-ML   = 122.0                   # margins, generous
-MR   = 122.0
-MT   = 120.0
-MB   = 120.0
+W, H = 1296.0, 1728.0
+STRIPE = 46.0                  # yellow spine width
+ML = STRIPE + 118.0
+MR = 118.0
+MB = 120.0
+cx = STRIPE + (W - STRIPE)/2.0 # optical center of the content field
 
 # ---------- fonts ----------
-pdfmetrics.registerFont(TTFont("Disp",  FONTS+"BigShoulders-Regular.ttf"))  # thin condensed hero
-pdfmetrics.registerFont(TTFont("DispB", FONTS+"BigShoulders-Bold.ttf"))
-pdfmetrics.registerFont(TTFont("Sans",  FONTS+"Outfit-Regular.ttf"))        # Sofia Pro stand-in
-pdfmetrics.registerFont(TTFont("SansB", FONTS+"Outfit-Bold.ttf"))
+pdfmetrics.registerFont(TTFont("Grot",  FONTS+"WorkSans-Bold.ttf"))       # arch + caps
+pdfmetrics.registerFont(TTFont("GrotR", FONTS+"WorkSans-Regular.ttf"))
+pdfmetrics.registerFont(TTFont("Serif", FONTS+"LibreBaskerville-Regular.ttf"))  # subtitle
 
 c = canvas.Canvas(OUT, pagesize=(W, H))
 
-def tw(text, font, size, track=0.0):
-    return pdfmetrics.stringWidth(text, font, size) + track*max(0, len(text)-1)
+def sw(s, font, size, track=0.0):
+    return pdfmetrics.stringWidth(s, font, size) + track*max(0, len(s)-1)
 
 def text(x, y, s, font, size, color, track=0.0, align="left", alpha=1.0):
-    width = tw(s, font, size, track)
+    width = sw(s, font, size, track)
     if   align == "center": x -= width/2.0
     elif align == "right":  x -= width
-    c.saveState()
-    c.setFillColor(color); c.setFillAlpha(alpha)
-    t = c.beginText(); t.setTextOrigin(x, y)
-    t.setFont(font, size); t.setCharSpace(track)
-    t.textOut(s)
-    c.drawText(t)
-    c.restoreState()
+    c.saveState(); c.setFillColor(color); c.setFillAlpha(alpha)
+    t = c.beginText(); t.setTextOrigin(x, y); t.setFont(font, size); t.setCharSpace(track)
+    t.textOut(s); c.drawText(t); c.restoreState()
     return width
 
-def fit_size(s, font, target_w, track_ratio=0.0, start=400):
-    size = start
-    while size > 8:
-        if tw(s, font, size, track_ratio*size) <= target_w:
-            return size
-        size -= 0.5
-    return size
+def arch_text(ccx, ccy, R, s, font, size, color, track=0.0):
+    """set string s along the top of a circle (radius R, center ccx,ccy)."""
+    adv = [pdfmetrics.stringWidth(ch, font, size) + track for ch in s]
+    span = sum(adv)/R
+    ang = math.pi/2 + span/2.0
+    for ch, w in zip(s, adv):
+        a = ang - (w/2.0)/R
+        gx = ccx + R*math.cos(a); gy = ccy + R*math.sin(a)
+        c.saveState(); c.setFillColor(color)
+        c.translate(gx, gy); c.rotate(math.degrees(a - math.pi/2))
+        cw = pdfmetrics.stringWidth(ch, font, size)
+        t = c.beginText(); t.setTextOrigin(-cw/2.0, 0); t.setFont(font, size); t.textOut(ch)
+        c.drawText(t); c.restoreState()
+        ang -= w/R
 
-def parallelogram(x, y, w, h, skew, color, alpha=1.0, stroke=False, lw=2.0):
-    c.saveState()
-    c.setFillColor(color); c.setFillAlpha(alpha)
-    c.setStrokeColor(color); c.setStrokeAlpha(alpha); c.setLineWidth(lw)
-    p = c.beginPath()
-    p.moveTo(x, y); p.lineTo(x+w, y); p.lineTo(x+w+skew, y+h); p.lineTo(x+skew, y+h)
-    p.close()
-    c.drawPath(p, fill=(0 if stroke else 1), stroke=(1 if stroke else 0))
-    c.restoreState()
-
-# =====================================================================
-# FIELD
-# =====================================================================
-c.setFillColor(BLUE); c.rect(0, 0, W, H, fill=1, stroke=0)
-
-# =====================================================================
-# THE GESTURE, a tall mauve parallelogram on the right (Ella cover),
-# with a slim cream companion, two-tone like the Ella decoration page.
-# =====================================================================
-parallelogram(918, 806, 190, 612, 176, MAUVE, 1.0)          # main slab
-parallelogram(884, 806, 20, 612, 176, CREAM, 1.0)           # crisp cream keyline
+def star(px, py, r, color, alpha=1.0, points=5, rot=-math.pi/2):
+    c.saveState(); c.setFillColor(color); c.setFillAlpha(alpha)
+    p = c.beginPath(); inner = r*0.42
+    for i in range(points*2):
+        rr = r if i % 2 == 0 else inner
+        a = rot + math.pi*i/points
+        xx = px + rr*math.cos(a); yy = py + rr*math.sin(a)
+        (p.moveTo if i == 0 else p.lineTo)(xx, yy)
+    p.close(); c.drawPath(p, fill=1, stroke=0); c.restoreState()
 
 # =====================================================================
-# TOP MICRO-HEADER
+# GROUND + yellow spine
 # =====================================================================
-top = H - MT
-text(ML, top, "BIRTH  ANNOUNCEMENT", "Sans", 13, ROSE_T, track=5.2, alpha=0.95)
-text(W-MR, top, "Nº 001", "Sans", 13, ROSE_T, track=5.2, align="right", alpha=0.95)
-c.setStrokeColor(CREAM); c.setStrokeAlpha(0.35); c.setLineWidth(1.0)
-c.line(ML, top-18, W-MR, top-18)
+c.setFillColor(BLUSH); c.rect(0, 0, W, H, fill=1, stroke=0)
+c.setFillColor(YELLOW); c.rect(0, 0, STRIPE, H, fill=1, stroke=0)
 
 # =====================================================================
-# HERO STATEMENT, thin condensed, tracked, stacked  (left column)
+# RISING SUN  (dawn / July / Leo)  -  the flat playful illustration
 # =====================================================================
-col_w = 780  # left type column, keeps clear of the slab
-
-# "THIS IS"
-text(ML, 1214, "THIS IS", "Disp", 92, ROSE_T, track=8)
-
-# "SOFIA", the hero, thin and large but composed
-sofia_size = fit_size("SOFIA", "Disp", col_w, track_ratio=0.02, start=300)
-text(ML, 966, "SOFIA", "Disp", sofia_size, CREAM, track=sofia_size*0.02)
-
-# "DURAZZO."
-dz_size = fit_size("DURAZZO.", "Disp", col_w, track_ratio=0.06, start=150)
-dz_size = min(dz_size, 132)
-text(ML, 838, "DURAZZO.", "Disp", dz_size, CREAM, track=dz_size*0.06)
-
-# established micro-caps beneath the name (Ella "ESTABLISHED ..." device)
-text(ML, 788, "ESTABLISHED 07 · 31 · 2026  |  LEO  |  MMXXVI",
-     "Sans", 12.5, ROSE_T, track=3.4, alpha=0.9)
-
-# =====================================================================
-# TONE TRIAD, restrained homage, lower-left
-# =====================================================================
-c.setStrokeColor(CREAM); c.setStrokeAlpha(0.30); c.setLineWidth(1.0)
-c.line(ML, 360, ML+300, 360)
-text(ML, 322, "BRAND TONE", "Sans", 11, ROSE_T, track=4.2, alpha=0.85)
-
-triad = [("SOFIA IS ", "NEW."), ("SOFIA IS ", "BRIGHT."), ("SOFIA IS ", "HERE.")]
-ty = 268
-for a, b in triad:
-    wa = text(ML, ty, a, "Disp", 44, CREAM, track=2.4)
-    text(ML+wa, ty, b, "Disp", 44, MAUVE, track=2.4)
-    ty -= 58
-
-# small parallelogram echo, lower-right, to balance the triad
-parallelogram(1052, 236, 58, 150, 43, MAUVE, 1.0)
-parallelogram(1036, 236, 8, 150, 43, CREAM, 1.0)
+HZ = 700.0          # horizon line
+Rs = 162.0          # sun radius
+# soft yellow halo
+c.saveState(); c.setFillColor(YELLOW); c.setFillAlpha(0.42)
+c.circle(cx, HZ, Rs*1.7, fill=1, stroke=0); c.restoreState()
+# tapered rays (upper half only, masked below)
+c.saveState()
+NR = 18
+for k in range(NR+1):
+    a = math.pi * k/NR          # 0..pi  (above horizon)
+    r0 = Rs*1.16; r1 = Rs*1.72
+    half = 0.028
+    x1 = cx + r0*math.cos(a-half); y1 = HZ + r0*math.sin(a-half)
+    x2 = cx + r0*math.cos(a+half); y2 = HZ + r0*math.sin(a+half)
+    xt = cx + r1*math.cos(a);       yt = HZ + r1*math.sin(a)
+    p = c.beginPath(); p.moveTo(x1,y1); p.lineTo(xt,yt); p.lineTo(x2,y2); p.close()
+    c.setFillColor(BLUE); c.drawPath(p, fill=1, stroke=0)
+c.restoreState()
+# sun disk
+c.setFillColor(BLUE); c.circle(cx, HZ, Rs, fill=1, stroke=0)
+# a couple of stars in the sky
+star(cx-244, HZ+250, 15, BLUE, 1.0)
+star(cx+250, HZ+300, 11, YELLOW, 1.0)
+star(cx+238, HZ+120, 9,  INK,  1.0)
+star(cx-238, HZ+120, 7,  INK,  1.0)
+# mask everything below the horizon for a clean rising sun
+c.setFillColor(BLUSH); c.rect(0, 0, W, HZ, fill=1, stroke=0)
+c.setFillColor(YELLOW); c.rect(0, 0, STRIPE, HZ, fill=1, stroke=0)
+# horizon rule
+c.setStrokeColor(INK); c.setLineWidth(2.2); c.line(ML, HZ, W-MR, HZ)
 
 # =====================================================================
-# FOOTER
+# ARCHED NAME  (the "title")
 # =====================================================================
-foot = MB - 8
-c.setStrokeColor(CREAM); c.setStrokeAlpha(0.35); c.setLineWidth(1.0)
-c.line(ML, foot+22, W-MR, foot+22)
-text(ML, foot-8, "SOFIA DURAZZO", "Sans", 12, CREAM, track=4.0, alpha=0.9)
-text(W-MR, foot-8, "A GIRL", "Sans", 12, ROSE_T, track=4.6, align="right", alpha=0.95)
+arch_cy = 748.0
+arch_R  = 596.0
+name_size = 160
+# fit so the name spans a generous arch without crowding the edges
+while sw("SOFIA DURAZZO", "Grot", name_size, 6)/arch_R > 2.80 and name_size > 40:
+    name_size -= 1
+arch_text(cx, arch_cy, arch_R, "SOFIA DURAZZO", "Grot", name_size, INK, track=6)
+
+# =====================================================================
+# SERIF SUBTITLE + DATE  (the "author" line sits in the lower third)
+# =====================================================================
+text(cx, 610, "A Brand-New Human, Here to Discover", "Serif", 30, INK, align="center")
+text(cx, 562, "Life’s Big and Little Wonders",       "Serif", 30, INK, align="center")
+
+text(cx, 384, "BORN THE 31ST OF JULY  ·  2026", "Grot", 22, BLUE, track=3.4, align="center")
+text(cx, 338, "A  BIRTH  ANNOUNCEMENT", "GrotR", 12.5, INK, track=5.2, align="center", alpha=0.68)
 
 c.showPage()
 c.save()
