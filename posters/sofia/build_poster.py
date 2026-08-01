@@ -105,7 +105,18 @@ top = H - MT
 c.setStrokeColor(CREAM); c.setStrokeAlpha(0.9); c.setLineWidth(1.2)
 c.line(ML, top, W-MR, top)
 text(ML, top+11, "BIRTH  ANNOUNCEMENT", "Mono", 12.5, CREAM, track=4.6, alpha=0.92)
-text(W-MR, top+11, "Nº 001", "Mono", 12.5, RED, track=4.6, align="right")
+
+# navy+red flag mark, top-right corner  (arena-poster signature)
+def flag(x, y, w, h, sk):
+    def half(x0, w0, col):
+        c.saveState(); c.setFillColor(col); c.setFillAlpha(1.0)
+        p = c.beginPath()
+        p.moveTo(x0, y); p.lineTo(x0+w0, y); p.lineTo(x0+w0+sk, y+h); p.lineTo(x0+sk, y+h)
+        p.close(); c.drawPath(p, fill=1, stroke=0); c.restoreState()
+    half(x,        w/2, RED)
+    half(x+w/2,    w/2, CREAM)
+_fw, _fh, _fsk = 50.0, 24.0, 12.0
+flag(W-MR-_fw-_fsk, top+9, _fw, _fh, _fsk)
 def cross(x, y, s, col, w=1.0, a=0.9):
     c.saveState(); c.setStrokeColor(col); c.setStrokeAlpha(a); c.setLineWidth(w)
     c.line(x-s, y, x+s, y); c.line(x, y-s, x, y+s); c.restoreState()
