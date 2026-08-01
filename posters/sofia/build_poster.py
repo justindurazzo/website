@@ -164,17 +164,6 @@ c.setStrokeColor(CREAM); c.setStrokeAlpha(0.35); c.setLineWidth(1.0)
 c.line(ML, 476, W-MR, 476)
 
 # =====================================================================
-# TONE TRIAD  (homage to "ELLA IS HUMAN / FEMALE / YOUNG")
-# =====================================================================
-triad = [("SOFIA IS ", "NEW."), ("SOFIA IS ", "BRIGHT."), ("SOFIA IS ", "HERE.")]
-ty = 408
-for a, b in triad:
-    x = ML
-    wa = text(x, ty, a, "SansB", 25, CREAM, track=3.2, alpha=0.92)
-    text(x+wa, ty, b, "SansB", 25, MAGENTA, track=3.2)
-    ty -= 46
-
-# =====================================================================
 # FOOTER  (clinical date coordinates)
 # =====================================================================
 foot = MB + 40
