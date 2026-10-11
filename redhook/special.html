@@ -3,10 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Red Hook Focacceria, weekend special</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
+  /* Self-hosted fonts, so the sign renders deterministically with no runtime
+     dependency on Google Fonts. Playfair Display is a variable font (400-900). */
+  @font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 900;
+             font-display:swap;src:url("fonts/playfair.woff2") format("woff2");}
+  @font-face{font-family:"EB Garamond";font-style:normal;font-weight:400;
+             font-display:swap;src:url("fonts/ebgaramond-400.woff2") format("woff2");}
+  @font-face{font-family:"Pinyon Script";font-style:normal;font-weight:400;
+             font-display:swap;src:url("fonts/pinyon-400.woff2") format("woff2");}
   :root{
     --paper:#f4efe3; --ink:#2a2620; --ink-soft:#554f43;
     --brick:#9e2b25; --brick-d:#7c1d1a; --olive:#3f4632; --amber:#d68a2c; --gold:#b6924f;
@@ -30,9 +35,9 @@
 
   .wheat{color:var(--brick);display:block;margin:0 auto;}
 
-  /* italic eyebrow */
-  .eyebrow-script{font-family:var(--sd);font-style:italic;font-weight:400;font-size:74px;line-height:1.02;color:var(--olive);}
-  .flourish{margin:18px auto 0;}
+  /* handwritten script eyebrow */
+  .eyebrow-script{font-family:"Pinyon Script","Playfair Display",Georgia,serif;font-weight:400;font-size:96px;line-height:1.0;color:var(--olive);}
+  .flourish{margin:16px auto 0;}
 
   /* headline */
   .headline{font-family:var(--sd);font-weight:800;text-transform:uppercase;
