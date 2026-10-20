@@ -695,7 +695,6 @@ body.lb-open { overflow: hidden; }
     padding: 22px 4px;
     border-bottom: 1px solid var(--line);
     color: var(--ink);
-    transition: padding-left 0.4s var(--ease);
 }
 .lab-name {
     font-family: var(--display);
@@ -703,7 +702,25 @@ body.lb-open { overflow: hidden; }
     font-size: clamp(20px, 2vw, 30px);
     letter-spacing: -0.015em;
     line-height: 1.05;
+    flex-shrink: 0;
+    white-space: nowrap;
+    transition: transform 0.4s var(--ease);
 }
+/* Logline: always in the layout (no reflow on hover), revealed by opacity.
+   The left padding leaves room for the name's 14px hover slide. */
+.lab-logline {
+    min-width: 0;
+    margin-left: auto;
+    padding-left: 14px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--muted);
+    text-align: right;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.35s ease, transform 0.5s var(--ease);
+}
+.lab-logline + .lab-arrow { margin-left: 0; }
 .lab-host {
     font-size: 11px;
     letter-spacing: 0.14em;
@@ -718,10 +735,33 @@ body.lb-open { overflow: hidden; }
     color: var(--muted);
     transition: transform 0.4s var(--ease), color 0.3s ease;
 }
-.lab-item:hover { padding-left: 14px; }
+.lab-item:hover .lab-name,
+.lab-item:focus-visible .lab-name { transform: translateX(14px); }
+.lab-item:hover .lab-logline,
+.lab-item:focus-visible .lab-logline { opacity: 1; transform: none; }
 .lab-item:hover .lab-host { color: var(--muted); }
 .lab-item:hover .lab-arrow { transform: translate(4px, -4px); color: var(--ink); }
 @media (max-width: 760px) { .lab-cols { grid-template-columns: 1fr; gap: 5vh; } }
 @media (max-width: 640px) {
     .lab-item { gap: 12px; padding: 18px 2px; }
+}
+/* Mid widths: loglines wrap to 2-3 lines, so center each row on a fixed
+   height to keep the list evenly spaced. */
+@media (hover: hover) and (min-width: 761px) and (max-width: 1400px) {
+    .lab-item { align-items: center; min-height: 78px; padding-top: 12px; padding-bottom: 12px; }
+    .lab-logline { font-size: 12px; }
+}
+/* Touch: no hover to reveal, so the logline sits under the name, always on. */
+@media (hover: none) {
+    .lab-item { flex-wrap: wrap; row-gap: 6px; }
+    .lab-logline {
+        order: 3;
+        flex-basis: 100%;
+        margin-left: 0;
+        padding-left: 0;
+        text-align: left;
+        opacity: 1;
+        transform: none;
+    }
+    .lab-logline + .lab-arrow { margin-left: auto; }
 }
